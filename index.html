@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Electrical Calculator PWA</title>
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#121212" />
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- UI Icons (Phosphor Icons) -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body class="theme-dark">
+
+  <!-- ==================== AUTH SCREEN ==================== -->
+  <div id="auth-screen" class="screen active">
+    <div class="auth-container glass-card">
+      <div class="auth-hero">
+        <i class="ph-fill ph-lightning" style="font-size: 4rem; color: var(--primary);"></i>
+        <h1 id="auth-title">Giriş Yap</h1>
+        <p id="auth-subtitle" class="text-muted">Hesaplamalarına ulaşmak için giriş yap</p>
+      </div>
+
+      <form id="auth-form" class="calculator-form">
+        <div class="input-group">
+          <label for="auth-username" data-i18n="username">Kullanıcı Adı</label>
+          <input type="text" id="auth-username" required placeholder="mühendis123" />
+        </div>
+
+        <!-- Only visible during registration -->
+        <div class="input-group" id="group-email" style="display: none;">
+          <label for="auth-email" data-i18n="email">E-posta</label>
+          <input type="email" id="auth-email" placeholder="muhendis@sirket.com" />
+        </div>
+
+        <div class="input-group">
+          <label for="auth-password" data-i18n="password">Şifre</label>
+          <input type="password" id="auth-password" required placeholder="••••••••" />
+        </div>
+
+        <div id="auth-error" class="error-msg" style="display: none;"></div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="btn-auth-submit" data-i18n="login">Giriş
+          Yap</button>
+      </form>
+
+      <div class="auth-footer">
+        <p id="auth-toggle-text">
+          <span data-i18n="no_account">Hesabınız yok mu?</span>
+          <button type="button" class="btn-text" id="btn-toggle-auth" data-action="register">
+            <span data-i18n="register">Kayıt Ol</span>
+          </button>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MAIN APP ==================== -->
+  <div id="app-screen" class="screen" style="display: none;">
+
+    <!-- Top Header -->
+    <header class="app-header">
+      <div class="user-info">
+        <div class="avatar"><i class="ph ph-user"></i></div>
+        <div>
+          <span class="greeting" data-i18n="hello">Merhaba,</span><br>
+          <strong id="display-username">Kullanıcı</strong>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="btn-theme" class="icon-btn" title="Tema Değiştir"><i class="ph ph-moon"></i></button>
+        <button id="btn-lang" class="icon-btn" title="Change Language">EN</button>
+        <button id="btn-logout" class="icon-btn" title="Çıkış Yap"><i class="ph ph-sign-out"></i></button>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="app-content">
+
+      <!-- TAB: 1-PHASE MOTOR -->
+      <section id="tab-1ph" class="tab-content active">
+        <h2 class="tab-title" data-i18n="tab_1ph">Monofaze Motor (1Φ)</h2>
+        <div class="glass-card">
+          <form class="calculator-form" id="form-1ph">
+            <div class="input-row">
+              <div class="input-group">
+                <label data-i18n="voltage">Gerilim (V)</label>
+                <input type="number" id="inp-1ph-v" value="230" step="1" required />
+              </div>
+              <div class="input-group">
+                <label data-i18n="power_kw">Güç (kW)</label>
+                <input type="number" id="inp-1ph-p" step="0.01" />
+              </div>
+            </div>
+            <div class="input-row mt-2">
+              <div class="input-group">
+                <label data-i18n="current_a">Akım (A)</label>
+                <input type="number" id="inp-1ph-i" step="0.1" />
+              </div>
+              <div class="input-group">
+                <label data-i18n="power_factor">Güç Faktörü (cosφ)</label>
+                <input type="number" id="inp-1ph-pf" value="0.80" step="0.01" min="0" max="1" />
+              </div>
+            </div>
+            <div class="toggle-group mt-2">
+              <label data-i18n="use_efficiency">Verim Dahil Edilsin mi?</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="tog-1ph-eta" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div id="cont-1ph-eta" class="efficiency-container">
+              <div class="input-group">
+                <label data-i18n="efficiency">Verim (η) %</label>
+                <input type="number" id="inp-1ph-eta" value="85" step="0.1" min="1" max="100" />
+              </div>
+            </div>
+            <small class="help-text" data-i18n="fill_any_two">Lütfen bilinmeyen değeri hesaplamak için diğer alanları
+              doldurun.</small>
+            <button type="submit" class="btn btn-primary btn-block mt-3">
+              <i class="ph ph-calculator"></i> <span data-i18n="calculate">Hesapla</span>
+            </button>
+          </form>
+        </div>
+        <!-- Result Area -->
+        <div id="res-1ph" class="result-card glass-card hidden"></div>
+      </section>
+
+      <!-- TAB: 3-PHASE MOTOR -->
+      <section id="tab-3ph" class="tab-content">
+        <h2 class="tab-title" data-i18n="tab_3ph">Trifaze Motor (3Φ)</h2>
+        <div class="glass-card">
+          <form class="calculator-form" id="form-3ph">
+            <div class="input-row">
+              <div class="input-group">
+                <label data-i18n="voltage">Gerilim (V)</label>
+                <input type="number" id="inp-3ph-v" value="400" step="1" required />
+              </div>
+              <div class="input-group">
+                <label data-i18n="power_kw">Güç (kW)</label>
+                <input type="number" id="inp-3ph-p" step="0.01" />
+              </div>
+            </div>
+            <div class="input-row mt-2">
+              <div class="input-group">
+                <label data-i18n="current_a">Akım (A)</label>
+                <input type="number" id="inp-3ph-i" step="0.1" />
+              </div>
+              <div class="input-group">
+                <label data-i18n="power_factor">Güç Faktörü (cosφ)</label>
+                <input type="number" id="inp-3ph-pf" value="0.85" step="0.01" min="0" max="1" />
+              </div>
+            </div>
+            <div class="toggle-group mt-2">
+              <label data-i18n="use_efficiency">Verim Dahil Edilsin mi?</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="tog-3ph-eta" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div id="cont-3ph-eta" class="efficiency-container">
+              <div class="input-group">
+                <label data-i18n="efficiency">Verim (η) %</label>
+                <input type="number" id="inp-3ph-eta" value="90" step="0.1" min="1" max="100" />
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-block mt-3">
+              <i class="ph ph-calculator"></i> <span data-i18n="calculate">Hesapla</span>
+            </button>
+          </form>
+        </div>
+        <div id="res-3ph" class="result-card glass-card hidden"></div>
+      </section>
+
+      <!-- TAB: TRANSFORMER -->
+      <section id="tab-trafo" class="tab-content">
+        <h2 class="tab-title" data-i18n="tab_trafo">Trafo / Pano</h2>
+        <div class="glass-card">
+          <form class="calculator-form" id="form-trafo">
+            <div class="input-group">
+              <label data-i18n="trafo_power">Trafo Gücü (kVA)</label>
+              <input type="number" id="inp-tr-s" placeholder="Örn: 1000" required step="1" />
+            </div>
+            <div class="input-row mt-2">
+              <div class="input-group">
+                <label data-i18n="primary_v">Primer (kV)</label>
+                <input type="number" id="inp-tr-vp" value="34.5" step="0.1" required />
+              </div>
+              <div class="input-group">
+                <label data-i18n="secondary_v">Sekonder (V)</label>
+                <input type="number" id="inp-tr-vs" value="400" step="1" required />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3">
+              <i class="ph ph-lightning"></i> <span data-i18n="calculate">Hesapla</span>
+            </button>
+          </form>
+        </div>
+        <div id="res-trafo" class="result-card glass-card hidden"></div>
+      </section>
+
+      <!-- TAB: KVAR -->
+      <section id="tab-kvar" class="tab-content">
+        <h2 class="tab-title" data-i18n="tab_kvar">kVAR / Kompanzasyon</h2>
+
+        <!-- Calculator 1: Find Required kVAR -->
+        <div class="glass-card">
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">⚡ Gerekli Kondansatör (kVAR) Hesabı</h3>
+          <form class="calculator-form" id="form-kvar">
+            <div class="input-group">
+              <label data-i18n="active_power">Aktif Güç (kW)</label>
+              <input type="number" id="inp-kv-p" required step="0.1" />
+            </div>
+            <div class="input-group mt-2">
+              <label data-i18n="voltage">Sistem Gerilimi (V)</label>
+              <input type="number" id="inp-kv-v" value="400" step="1" required />
+            </div>
+            <div class="input-row mt-2">
+              <div class="input-group">
+                <label data-i18n="current_pf">Mevcut cosφ₁</label>
+                <input type="number" id="inp-kv-pf1" value="0.70" step="0.01" min="0" max="1" required />
+              </div>
+              <div class="input-group">
+                <label data-i18n="target_pf">Hedef cosφ₂</label>
+                <input type="number" id="inp-kv-pf2" value="0.95" step="0.01" min="0" max="1" required />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3">
+              <i class="ph ph-chart-line-up"></i> <span data-i18n="calculate">Hesapla</span>
+            </button>
+          </form>
+        </div>
+        <div id="res-kvar" class="result-card glass-card hidden"></div>
+
+        <!-- Calculator 2: Find Current from kVAR -->
+        <div class="glass-card mt-3">
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">🔌 Kondansatör Akımı (A) Hesabı</h3>
+          <form class="calculator-form" id="form-kvar-current">
+            <div class="input-row">
+              <div class="input-group">
+                <label>Kondansatör Gücü (kVAR)</label>
+                <input type="number" id="inp-kvc-q" required step="0.1" placeholder="Örn: 25" />
+              </div>
+              <div class="input-group">
+                <label data-i18n="voltage">Sistem Gerilimi (V)</label>
+                <input type="number" id="inp-kvc-v" value="400" step="1" required />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-secondary btn-block mt-3">
+              <i class="ph ph-lightning"></i> Akımı Hesapla
+            </button>
+          </form>
+          <div id="res-kvar-current" class="result-card glass-card hidden"></div>
+        </div>
+      </section>
+
+      <!-- TAB: STAR-DELTA -->
+      <section id="tab-yd" class="tab-content">
+        <h2 class="tab-title" data-i18n="tab_yd">Yıldız-Üçgen Kontaktör Seçimi</h2>
+        <div class="glass-card">
+          <p class="help-text" style="margin-bottom:1rem;">Motor akımına göre üç kontaktör ve termik röle akımlarını
+            hesaplar.</p>
+          <form class="calculator-form" id="form-yd">
+            <div class="input-row">
+              <div class="input-group">
+                <label data-i18n="voltage">Gerilim (V)</label>
+                <input type="number" id="inp-yd-v" value="400" step="1" required />
+              </div>
+              <div class="input-group">
+                <label data-i18n="power_factor">Güç Faktörü (cosφ)</label>
+                <input type="number" id="inp-yd-pf" value="0.80" step="0.01" min="0" max="1" />
+              </div>
+            </div>
+            <div class="input-row mt-2">
+              <div class="input-group">
+                <label data-i18n="power_kw">Motor Gücü (kW)</label>
+                <input type="number" id="inp-yd-p" step="0.01" placeholder="Örn: 15" />
+              </div>
+              <div class="input-group">
+                <label data-i18n="current_a">Motor Akımı (A) — Alternatif</label>
+                <input type="number" id="inp-yd-i" step="0.1" placeholder="Veya doğrudan girin" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3">
+              <i class="ph ph-lightning"></i> <span data-i18n="calculate">Hesapla</span>
+            </button>
+          </form>
+        </div>
+        <div id="res-yd" class="result-card glass-card hidden"></div>
+      </section>
+
+      <!-- TAB: BUSBAR CALCULATOR -->
+      <section id="tab-busbar" class="tab-content">
+        <h2 class="tab-title" data-i18n="tab_busbar">Bakır Bara Seçimi</h2>
+        <div class="glass-card">
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">⚡ <span data-i18n="busbar_calc">Bakır Bara Seçim
+              Hesaplayıcı</span></h3>
+          <p class="help-text" style="margin-bottom:1rem;">Akım değerini girin, Panelmaster standartlarına göre uygun
+            barayı bulun.</p>
+          <form class="calculator-form" id="form-busbar">
+            <div class="input-group">
+              <label data-i18n="current_a">Akım (A)</label>
+              <input type="number" id="inp-bus-i" placeholder="Örn: 1250" required />
+            </div>
+            <div class="toggle-group mt-2">
+              <label data-i18n="neutral_half">Nötr Kesiti Yarısı (%50) mı?</label>
+              <label class="toggle-switch">
+                <input type="checkbox" id="tog-bus-n-half">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3">
+              <i class="ph ph-lightning"></i> <span data-i18n="calculate">Hesapla</span>
+            </button>
+          </form>
+          <div id="res-busbar" class="result-card glass-card hidden"
+            style="margin-top:1.5rem; border-top: 4px solid var(--primary);"></div>
+        </div>
+      </section>
+
+      <!-- TAB: VOLTAGE DROP -->
+      <section id="tab-vdrop" class="tab-content">
+        <h2 class="tab-title" data-i18n="tab_vdrop">Gerilim Düşümü</h2>
+        <div class="glass-card">
+          <form class="calculator-form" id="form-vdrop">
+            <div class="input-row">
+              <div class="input-group">
+                <label>Sistem Tipi</label>
+                <select id="inp-vd-phase"
+                  style="background:var(--surface);color:var(--text-main);border:1px solid var(--secondary);padding:0.8rem 1rem;border-radius:var(--radius-sm);width:100%;font-size:1rem;">
+                  <option value="3">Trifaze (3Φ)</option>
+                  <option value="1">Monofaze (1Φ)</option>
+                </select>
+              </div>
+              <div class="input-group">
+                <label>İletken Tipi</label>
+                <select id="inp-vd-mat"
+                  style="background:var(--surface);color:var(--text-main);border:1px solid var(--secondary);padding:0.8rem 1rem;border-radius:var(--radius-sm);width:100%;font-size:1rem;">
+                  <option value="0.0175">Bakır (Cu)</option>
+                  <option value="0.028">Alüminyum (Al)</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-row mt-2">
+              <div class="input-group">
+                <label data-i18n="voltage">Gerilim (V)</label>
+                <input type="number" id="inp-vd-v" value="400" step="1" />
+              </div>
+              <div class="input-group">
+                <label data-i18n="current_a">Akım (A)</label>
+                <input type="number" id="inp-vd-i" required step="0.1" />
+              </div>
+            </div>
+            <div class="input-row mt-2">
+              <div class="input-group">
+                <label>Kablo Uzunluğu (m)</label>
+                <input type="number" id="inp-vd-len" required step="1" placeholder="Örn: 100" />
+              </div>
+              <div class="input-group">
+                <label>Kablo Kesiti (mm²)</label>
+                <select id="inp-vd-area"
+                  style="background:var(--surface);color:var(--text-main);border:1px solid var(--secondary);padding:0.8rem 1rem;border-radius:var(--radius-sm);width:100%;font-size:1rem;">
+                  <option>1.5</option>
+                  <option>2.5</option>
+                  <option>4</option>
+                  <option>6</option>
+                  <option>10</option>
+                  <option>16</option>
+                  <option>25</option>
+                  <option>35</option>
+                  <option>50</option>
+                  <option>70</option>
+                  <option>95</option>
+                  <option>120</option>
+                  <option>150</option>
+                  <option>185</option>
+                  <option>240</option>
+                  <option>300</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3">
+              <i class="ph ph-ruler"></i> <span data-i18n="calculate">Hesapla</span>
+            </button>
+          </form>
+        </div>
+        <div id="res-vdrop" class="result-card glass-card hidden"></div>
+      </section>
+
+      <!-- TAB: SHORT CIRCUIT -->
+      <section id="tab-isc" class="tab-content">
+        <h2 class="tab-title" data-i18n="tab_isc">Kısa Devre Akımı</h2>
+        <div class="glass-card">
+          <p class="help-text" style="margin-bottom:1rem;">Trafo sekonder terminallerinde hesaplanır.</p>
+          <form class="calculator-form" id="form-isc">
+            <div class="input-row">
+              <div class="input-group">
+                <label data-i18n="trafo_power">Trafo Gücü (kVA)</label>
+                <input type="number" id="inp-isc-kva" required step="1" placeholder="Örn: 1000" />
+              </div>
+              <div class="input-group">
+                <label data-i18n="secondary_v">Sekonder Gerilim (V)</label>
+                <input type="number" id="inp-isc-v" value="400" step="1" />
+              </div>
+            </div>
+            <div class="input-group mt-2">
+              <label>Kısa Devre Empedansı Uk% (genellikle 4–6%)</label>
+              <input type="number" id="inp-isc-uk" value="4" step="0.1" min="1" max="20" />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3">
+              <i class="ph ph-warning"></i> <span data-i18n="calculate">Hesapla</span>
+            </button>
+          </form>
+        </div>
+        <div id="res-isc" class="result-card glass-card hidden"></div>
+      </section>
+
+      <!-- TAB: TOOLS -->
+      <section id="tab-tools" class="tab-content">
+        <h2 class="tab-title" data-i18n="tab_tools">Araçlar</h2>
+
+        <!-- HP <-> kW Converter -->
+        <div class="glass-card">
+          <h3 style="margin-bottom:1rem;font-size:1.1rem;">⚙️ HP ↔ kW Dönüştürücü</h3>
+          <div class="input-row">
+            <div class="input-group">
+              <label>HP (Beygir Gücü)</label>
+              <input type="number" id="inp-hp" step="0.01" placeholder="Örn: 10" />
+            </div>
+            <div class="input-group">
+              <label>kW</label>
+              <input type="number" id="inp-kw-conv" step="0.01" placeholder="Örn: 7.5" />
+            </div>
+          </div>
+          <div class="btn-row" style="display:flex;gap:0.5rem;margin-top:1rem;">
+            <button class="btn btn-primary" style="flex:1" onclick="convertHPtoKW()">HP → kW</button>
+            <button class="btn btn-secondary" style="flex:1" onclick="convertKWtoHP()">kW → HP</button>
+          </div>
+          <div id="res-hp"
+            style="margin-top:0.8rem;font-weight:600;text-align:center;font-size:1.1rem;color:var(--primary);"></div>
+        </div>
+
+        <!-- Soft-Starter Info -->
+        <div class="glass-card">
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">🔁 Soft-Starter Devreye Alma Akımı</h3>
+          <form class="calculator-form" id="form-ss">
+            <div class="input-row">
+              <div class="input-group">
+                <label>Motor Akımı I_nom (A)</label>
+                <input type="number" id="inp-ss-i" step="0.1" placeholder="Örn: 20" />
+              </div>
+              <div class="input-group">
+                <label>Devreye Alma Çarpanı</label>
+                <select id="inp-ss-mult"
+                  style="background:var(--surface);color:var(--text-main);border:1px solid var(--secondary);padding:0.8rem;border-radius:var(--radius-sm);width:100%;font-size:1rem;">
+                  <option value="2">2× (Hafif Yük)</option>
+                  <option value="3" selected>3× (Normal)</option>
+                  <option value="4">4× (Ağır Yük)</option>
+                </select>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3">
+              <i class="ph ph-calculator"></i> <span data-i18n="calculate">Hesapla</span>
+            </button>
+          </form>
+          <div id="res-ss" class="result-card glass-card hidden" style="margin-top:1rem;"></div>
+        </div>
+
+        <!-- Lighting -->
+        <div class="glass-card">
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">💡 Aydınlatma Hesabı</h3>
+          <form class="calculator-form" id="form-light">
+            <div class="input-row">
+              <div class="input-group">
+                <label>Alan (m²)</label>
+                <input type="number" id="inp-lt-area" step="1" placeholder="Örn: 50" />
+              </div>
+              <div class="input-group">
+                <label>Hedef Lüks (lx)</label>
+                <select id="inp-lt-lux"
+                  style="background:var(--surface);color:var(--text-main);border:1px solid var(--secondary);padding:0.8rem;border-radius:var(--radius-sm);width:100%;font-size:1rem;">
+                  <option value="100">100 lx — Depo/Koridor</option>
+                  <option value="200">200 lx — Merdiven</option>
+                  <option value="300" selected>300 lx — Ofis/Atölye</option>
+                  <option value="500">500 lx — Teknik Ofis</option>
+                  <option value="750">750 lx — Hassas İşlem</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-row mt-2">
+              <div class="input-group">
+                <label>Armatür Gücü (W)</label>
+                <input type="number" id="inp-lt-w" value="60" step="1" placeholder="Örn: 60" />
+              </div>
+              <div class="input-group">
+                <label>Armatür Verimliliği (lm/W)</label>
+                <input type="number" id="inp-lt-eff" value="100" step="1" placeholder="Örn: 100" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block mt-3">
+              <i class="ph ph-lightbulb"></i> <span data-i18n="calculate">Hesapla</span>
+            </button>
+          </form>
+          <div id="res-light" class="result-card glass-card hidden" style="margin-top:1rem;"></div>
+        </div>
+
+
+
+        <!-- IP Class Guide -->
+        <div class="glass-card">
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">🛡️ IP Koruma Sınıfı Rehberi</h3>
+          <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+            <thead>
+              <tr style="background:var(--primary);color:white;">
+                <th style="padding:6px 8px;text-align:left;">IP</th>
+                <th style="padding:6px 8px;text-align:left;">Katı Koruma</th>
+                <th style="padding:6px 8px;text-align:left;">Sıvı Koruma</th>
+                <th style="padding:6px 8px;text-align:left;">Kullanım Yeri</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--secondary)">
+                <td style="padding:6px 8px;">IP20</td>
+                <td style="padding:6px 8px;">Parmak</td>
+                <td style="padding:6px 8px;">Yok</td>
+                <td style="padding:6px 8px;">Dahili pano</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--secondary)">
+                <td style="padding:6px 8px;">IP30</td>
+                <td style="padding:6px 8px;">Alet &gt; 2.5mm</td>
+                <td style="padding:6px 8px;">Yok</td>
+                <td style="padding:6px 8px;">İç mekan pano</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--secondary)">
+                <td style="padding:6px 8px;">IP31</td>
+                <td style="padding:6px 8px;">Alet &gt; 2.5mm</td>
+                <td style="padding:6px 8px;">Düşey damlama</td>
+                <td style="padding:6px 8px;">İç mekan dağıtım</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--secondary)">
+                <td style="padding:6px 8px;">IP40</td>
+                <td style="padding:6px 8px;">Tel &gt; 1mm</td>
+                <td style="padding:6px 8px;">Yok</td>
+                <td style="padding:6px 8px;">İç mekan kontrol</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--secondary)">
+                <td style="padding:6px 8px;">IP41</td>
+                <td style="padding:6px 8px;">Tel &gt; 1mm</td>
+                <td style="padding:6px 8px;">Düşey damlama</td>
+                <td style="padding:6px 8px;">İç mekan terminal</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--secondary)">
+                <td style="padding:6px 8px;">IP44</td>
+                <td style="padding:6px 8px;">Tel &gt; 1mm</td>
+                <td style="padding:6px 8px;">Her yönden sıçrama</td>
+                <td style="padding:6px 8px;">Genel amaçlı</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--secondary)">
+                <td style="padding:6px 8px;">IP54</td>
+                <td style="padding:6px 8px;">Toz kısmi</td>
+                <td style="padding:6px 8px;">Her yönden sıçrama</td>
+                <td style="padding:6px 8px;">Açık / nemli</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--secondary)">
+                <td style="padding:6px 8px;">IP55</td>
+                <td style="padding:6px 8px;">Toz kısmi</td>
+                <td style="padding:6px 8px;">Su jeti</td>
+                <td style="padding:6px 8px;">Dış ortam motor</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--secondary)">
+                <td style="padding:6px 8px;">IP65</td>
+                <td style="padding:6px 8px;">Tam toz</td>
+                <td style="padding:6px 8px;">Su jeti</td>
+                <td style="padding:6px 8px;">Sanayi / dış</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--secondary)">
+                <td style="padding:6px 8px;">IP67</td>
+                <td style="padding:6px 8px;">Tam toz</td>
+                <td style="padding:6px 8px;">1m suya dalmaya</td>
+                <td style="padding:6px 8px;">Yıkama alanları</td>
+              </tr>
+              <tr>
+                <td style="padding:6px 8px;">IP68</td>
+                <td style="padding:6px 8px;">Tam toz</td>
+                <td style="padding:6px 8px;">Sürekli dalma</td>
+                <td style="padding:6px 8px;">Sualtı pompa</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- TAB: HISTORY -->
+      <section id="tab-history" class="tab-content">
+        <div class="history-header">
+          <h2 class="tab-title" data-i18n="tab_history">Kayıtlı İşler</h2>
+          <button id="btn-clear-history" class="btn-text text-danger" data-i18n="clear_all">Tümünü Sil</button>
+        </div>
+        <div class="category-filters">
+          <button class="cat-pill active" data-cat="all" data-i18n="all">Tümü</button>
+          <!-- Dynamic categories will be added here -->
+          <div id="dynamic-categories" style="display:inline-block"></div>
+        </div>
+        <div id="history-list" class="history-container">
+          <!-- History items injected via JS -->
+          <div class="empty-state">
+            <i class="ph ph-folder-open"></i>
+            <p data-i18n="no_history">Henüz kayıtlı hesaplama yok.</p>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-target="tab-1ph">
+        <i class="ph ph-number-circle-one"></i>
+        <span>1Φ</span>
+      </button>
+      <button class="nav-item" data-target="tab-3ph">
+        <i class="ph ph-number-circle-three"></i>
+        <span>3Φ</span>
+      </button>
+      <button class="nav-item" data-target="tab-yd">
+        <i class="ph ph-star"></i>
+        <span data-i18n="nav_yd">Y-Δ</span>
+      </button>
+      <button class="nav-item" data-target="tab-busbar">
+        <i class="ph ph-lightning"></i>
+        <span data-i18n="nav_busbar">Bara</span>
+      </button>
+      <button class="nav-item" data-target="tab-trafo">
+        <i class="ph ph-factory"></i>
+        <span data-i18n="nav_trafo">Trafo</span>
+      </button>
+      <button class="nav-item" data-target="tab-kvar">
+        <i class="ph ph-trend-up"></i>
+        <span>kVAR</span>
+      </button>
+      <button class="nav-item" data-target="tab-vdrop">
+        <i class="ph ph-wave-sine"></i>
+        <span data-i18n="nav_vdrop">V-Düşüm</span>
+      </button>
+      <button class="nav-item" data-target="tab-isc">
+        <i class="ph ph-warning-octagon"></i>
+        <span data-i18n="nav_isc">K.Devre</span>
+      </button>
+      <button class="nav-item" data-target="tab-tools">
+        <i class="ph ph-wrench"></i>
+        <span data-i18n="nav_tools">Araçlar</span>
+      </button>
+      <button class="nav-item" data-target="tab-history">
+        <i class="ph ph-folder"></i>
+        <span data-i18n="nav_history">Geçmiş</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- Save Modal -->
+  <div id="save-modal" class="modal-overlay hidden">
+    <div class="modal glass-card">
+      <h3 data-i18n="save_calc">Hesaplamayı Kaydet</h3>
+      <div class="input-group">
+        <label data-i18n="job_category">İş / Proje Adı (Kategori)</label>
+        <input type="text" id="modal-cat" placeholder="Örn: A Blok Pano" list="cat-suggestions" />
+        <datalist id="cat-suggestions"></datalist>
+      </div>
+      <div class="input-group mt-2">
+        <label data-i18n="notes">Notlar (Opsiyonel)</label>
+        <textarea id="modal-notes" rows="2" placeholder="Örn: 5. kat havalandırma motoru"></textarea>
+      </div>
+      <div class="modal-actions mt-3">
+        <button id="btn-modal-cancel" class="btn btn-secondary" data-i18n="cancel">İptal</button>
+        <button id="btn-modal-save" class="btn btn-primary" data-i18n="save">Kaydet</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="db.js"></script>
+  <script src="app.js"></script>
+</body>
+
+</html>

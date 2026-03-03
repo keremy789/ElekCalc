@@ -1,0 +1,17 @@
+{
+    "name": "electrical-calculator",
+    "version": "1.0.0",
+    "description": "Offline electrical calculations app",
+    "main": "index.js",
+    "scripts": {
+        "build": "echo build complete"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@capacitor/android": "^8.1.0",
+        "@capacitor/cli": "^8.1.0",
+        "@capacitor/core": "^8.1.0"
+    }
+}
