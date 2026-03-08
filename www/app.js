@@ -284,7 +284,12 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
             await updateProfile(user, { displayName: username });
 
             // Send verification email
-            await sendEmailVerification(user);
+            try {
+                await sendEmailVerification(user);
+            } catch (emailErr) {
+                console.error("Verification email failed:", emailErr);
+                alert("Doğrulama e-postası gönderilemedi, lütfen e-posta adresinizi kontrol edin veya daha sonra tekrar deneyin.");
+            }
 
             // Show verification notice
             document.getElementById('auth-form').style.display = 'none';
