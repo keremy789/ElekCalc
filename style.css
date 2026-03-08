@@ -372,8 +372,8 @@ input:checked+.slider:before {
 .app-content {
   flex: 1;
   padding: 1.5rem;
-  padding-bottom: calc(80px + env(safe-area-inset-bottom));
-  /* Space for bottom nav */
+  padding-bottom: calc(90px + env(safe-area-inset-bottom, 20px));
+  /* Increased space for bottom nav and safe area */
   overflow-y: auto;
 }
 
@@ -413,7 +413,7 @@ input:checked+.slider:before {
   background: var(--surface);
   display: flex;
   overflow-x: auto;
-  padding: 0.8rem 0 calc(0.8rem + env(safe-area-inset-bottom));
+  padding: 0.8rem 0 calc(1.5rem + env(safe-area-inset-bottom, 20px));
   border-top: 1px solid var(--secondary);
   z-index: 10;
   -webkit-overflow-scrolling: touch;
