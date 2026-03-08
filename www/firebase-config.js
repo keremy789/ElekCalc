@@ -1,18 +1,6 @@
 /**
- * firebase-config.js - Firebase Authentication Setup
- * Uses Firebase CDN (no bundler needed)
+ * firebase-config.js - Firebase Authentication Setup (Compat version)
  */
-
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js";
-import {
-    getAuth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    sendEmailVerification,
-    signOut,
-    onAuthStateChanged,
-    updateProfile
-} from "https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDikJkMJ9XgsOzrBxdSTA8jlfIbPOzjp2U",
@@ -24,16 +12,17 @@ const firebaseConfig = {
     measurementId: "G-82594LWP2S"
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+// Initialize Firebase with Compat SDK
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 
-// Expose to global scope so app.js can use it
+// Expose to global scope for app.js
 window.firebaseAuth = {
-    auth,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    sendEmailVerification,
-    signOut,
-    onAuthStateChanged,
-    updateProfile
+    auth: auth,
+    createUserWithEmailAndPassword: (auth, email, pass) => auth.createUserWithEmailAndPassword(email, pass),
+    signInWithEmailAndPassword: (auth, email, pass) => auth.signInWithEmailAndPassword(email, pass),
+    sendEmailVerification: (user) => user.sendEmailVerification(),
+    signOut: (auth) => auth.signOut(),
+    onAuthStateChanged: (auth, callback) => auth.onAuthStateChanged(callback),
+    updateProfile: (user, data) => user.updateProfile(data)
 };
