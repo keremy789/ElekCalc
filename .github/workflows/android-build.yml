@@ -24,10 +24,14 @@ jobs:
         run: npm install
 
       - name: Add Android Platform
-        run: npx cap add android || true
+        run: |
+          chmod +x ./node_modules/.bin/cap || true
+          npx cap add android || true
 
       - name: Sync Android Platform
-        run: npx cap sync android
+        run: |
+          chmod +x ./node_modules/.bin/cap || true
+          npx cap sync android
 
       - name: Set up Java
         uses: actions/setup-java@v4

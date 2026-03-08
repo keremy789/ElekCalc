@@ -26,13 +26,19 @@ jobs:
         run: npm install @capacitor/ios
 
       - name: Add iOS Platform
-        run: npx cap add ios
+        run: |
+          chmod +x ./node_modules/.bin/cap || true
+          npx cap add ios
 
       - name: Copy web assets to iOS project
-        run: npx cap copy ios
+        run: |
+          chmod +x ./node_modules/.bin/cap || true
+          npx cap copy ios
 
       - name: Update iOS project
-        run: npx cap update ios
+        run: |
+          chmod +x ./node_modules/.bin/cap || true
+          npx cap update ios
 
       - name: Build iOS App (Archive)
         run: |
