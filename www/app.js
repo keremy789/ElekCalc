@@ -305,25 +305,33 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
 });
 
 // Resend verification
-document.getElementById('btn-resend-verify')?.addEventListener('click', async () => {
-    const { auth, sendEmailVerification } = window.firebaseAuth;
-    if (auth.currentUser) {
-        try {
-            await sendEmailVerification(auth.currentUser);
-            alert("Doğrulama e-postası tekrar gönderildi.");
-        } catch (err) {
-            alert("Hata: " + err.message);
+const resendBtn = document.getElementById('btn-resend-verify');
+if (resendBtn) {
+    resendBtn.addEventListener('click', async () => {
+        const { auth, sendEmailVerification } = window.firebaseAuth;
+        if (auth.currentUser) {
+            try {
+                await sendEmailVerification(auth.currentUser);
+                alert("Doğrulama e-postası tekrar gönderildi.");
+            } catch (err) {
+                alert("Hata: " + err.message);
+            }
         }
-    }
-});
+    });
+}
 
 // Back to login after registration
-document.getElementById('btn-back-to-login')?.addEventListener('click', () => {
-    document.getElementById('verify-notice').style.display = 'none';
-    document.getElementById('auth-form').style.display = 'flex';
-    isLoginMode = true;
-    document.getElementById('btn-toggle-auth').click(); // Sync UI state
-});
+const backToLoginBtn = document.getElementById('btn-back-to-login');
+if (backToLoginBtn) {
+    backToLoginBtn.addEventListener('click', () => {
+        document.getElementById('verify-notice').style.display = 'none';
+        const authForm = document.getElementById('auth-form');
+        if (authForm) authForm.style.display = 'flex';
+        isLoginMode = true;
+        const toggleBtn = document.getElementById('btn-toggle-auth');
+        if (toggleBtn) toggleBtn.click(); // Sync UI state
+    });
+}
 
 document.getElementById('btn-logout').addEventListener('click', async () => {
     const { auth, signOut } = window.firebaseAuth;
