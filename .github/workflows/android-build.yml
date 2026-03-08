@@ -23,11 +23,6 @@ jobs:
       - name: Install Dependencies
         run: npm install
 
-      - name: Add Android Platform
-        run: |
-          chmod +x ./node_modules/.bin/cap || true
-          npx cap add android || true
-
       - name: Sync Android Platform
         run: |
           chmod +x ./node_modules/.bin/cap || true
@@ -37,7 +32,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'zulu'
-          java-version: '17'
+          java-version: '21'
 
       - name: Build Android App
         run: |
