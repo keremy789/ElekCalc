@@ -259,6 +259,7 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, email, pass);
             const user = userCredential.user;
+            alert("Giriş denemesi başarılı, doğrulama kontrol ediliyor...");
 
             if (!user.emailVerified) {
                 errEl.innerText = "Lütfen e-postanızı doğrulayın! Size bir doğrulama linki gönderdik.";
@@ -277,24 +278,34 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
     } else {
         // Register
         try {
+            alert("Kayıt işlemi başlıyor...");
             const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
             const user = userCredential.user;
+            alert("Hesap oluşturuldu: " + user.email);
 
             // Set display name (username)
-            await updateProfile(user, { displayName: username });
+            if (username) {
+                await updateProfile(user, { displayName: username });
+            }
 
             // Send verification email
             try {
+                alert("Doğrulama e-postası gönderiliyor...");
                 await sendEmailVerification(user);
+                alert("E-posta gönderim komutu başarılı.");
             } catch (emailErr) {
                 console.error("Verification email failed:", emailErr);
-                alert("Doğrulama e-postası gönderilemedi, lütfen e-posta adresinizi kontrol edin veya daha sonra tekrar deneyin.");
+                alert("Doğrulama e-postası gönderilemedi: " + emailErr.message);
             }
 
             // Show verification notice
-            document.getElementById('auth-form').style.display = 'none';
-            document.getElementById('verify-notice').style.display = 'block';
-            document.getElementById('verify-email-display').innerText = email;
+            alert("Bilgilendirme kutusu açılıyor...");
+            const authForm = document.getElementById('auth-form');
+            const verifyNotice = document.getElementById('verify-notice');
+            if (authForm) authForm.style.display = 'none';
+            if (verifyNotice) verifyNotice.style.display = 'block';
+            const emailDisplay = document.getElementById('verify-email-display');
+            if (emailDisplay) emailDisplay.innerText = email;
 
         } catch (err) {
             console.error(err);
