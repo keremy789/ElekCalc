@@ -372,8 +372,8 @@ input:checked+.slider:before {
 .app-content {
   flex: 1;
   padding: 1.5rem;
-  padding-bottom: calc(90px + env(safe-area-inset-bottom, 20px));
-  /* Increased space for bottom nav and safe area */
+  /* Extra padding so content never hides under fixed bottom nav */
+  padding-bottom: calc(100px + env(safe-area-inset-bottom, 34px));
   overflow-y: auto;
 }
 
@@ -406,17 +406,20 @@ input:checked+.slider:before {
 
 /* === Bottom Nav === */
 .bottom-nav {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
+  right: 0;
+  max-width: 500px;
+  margin: 0 auto;
   background: var(--surface);
   display: flex;
   overflow-x: auto;
-  /* 34px = iPhone home indicator height, env() adds safe-area on top */
-  padding: 0.8rem 0 calc(34px + env(safe-area-inset-bottom, 0px));
+  /* Top padding for icon spacing, bottom padding clears the home indicator */
+  padding-top: 0.8rem;
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 34px));
   border-top: 1px solid var(--secondary);
-  z-index: 10;
+  z-index: 100;
   -webkit-overflow-scrolling: touch;
   scroll-snap-type: x mandatory;
 }
