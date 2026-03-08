@@ -1,5 +1,10 @@
 {
   "appId": "com.electricalcalculator.app",
   "appName": "Electrical Calculator",
-  "webDir": "www"
+  "webDir": "www",
+  "ios": {
+    "contentInset": "automatic",
+    "scrollEnabled": false,
+    "backgroundColor": "#121212"
+  }
 }
