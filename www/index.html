@@ -12,6 +12,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <!-- UI Icons (Phosphor Icons) -->
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- Firebase (ES Module) -->
+  <script type="module" src="firebase-config.js"></script>
 </head>
 
 <body class="theme-dark">
@@ -25,16 +27,29 @@
         <p id="auth-subtitle" class="text-muted">Hesaplamalarına ulaşmak için giriş yap</p>
       </div>
 
+      <!-- Email Verification Notice (shown after registration) -->
+      <div id="verify-notice" style="display:none; text-align:center; padding: 1rem;">
+        <i class="ph ph-envelope" style="font-size:3rem; color:var(--primary);"></i>
+        <h2 style="margin:1rem 0 0.5rem">E-postanı Doğrula</h2>
+        <p class="text-muted">Kayıt başarılı! <strong id="verify-email-display"></strong> adresine bir doğrulama
+          bağlantısı gönderdik. Linke tıkladıktan sonra giriş yapabilirsin.</p>
+        <button class="btn btn-primary btn-block" style="margin-top:1.5rem" id="btn-back-to-login">Giriş ekranına
+          dön</button>
+        <button class="btn-text" style="margin-top:0.8rem; display:block; width:100%" id="btn-resend-verify">Tekrar
+          gönder</button>
+      </div>
+
       <form id="auth-form" class="calculator-form">
-        <div class="input-group">
+        <!-- Only shown during registration -->
+        <div class="input-group" id="group-username" style="display: none;">
           <label for="auth-username" data-i18n="username">Kullanıcı Adı</label>
-          <input type="text" id="auth-username" required placeholder="mühendis123" />
+          <input type="text" id="auth-username" placeholder="mühendis123" />
         </div>
 
-        <!-- Only visible during registration -->
-        <div class="input-group" id="group-email" style="display: none;">
+        <!-- Email is always visible (login identifier) -->
+        <div class="input-group" id="group-email">
           <label for="auth-email" data-i18n="email">E-posta</label>
-          <input type="email" id="auth-email" placeholder="muhendis@sirket.com" />
+          <input type="email" id="auth-email" required placeholder="muhendis@sirket.com" />
         </div>
 
         <div class="input-group">

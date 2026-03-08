@@ -236,7 +236,8 @@ document.getElementById('btn-toggle-auth').addEventListener('click', () => {
         ? `<span data-i18n="no_account">${translate('no_account')}</span> <button type="button" class="btn-text" id="btn-toggle-auth-inner"><span data-i18n="register">${translate('register')}</span></button>`
         : `<span data-i18n="has_account">${translate('has_account')}</span> <button type="button" class="btn-text" id="btn-toggle-auth-inner"><span data-i18n="login">${translate('login')}</span></button>`;
 
-    document.getElementById('group-email').style.display = isLoginMode ? 'none' : 'flex';
+    document.getElementById('group-username').style.display = isLoginMode ? 'none' : 'flex';
+    document.getElementById('auth-username').required = !isLoginMode;
 
     // Re-bind dynamic button
     document.getElementById('btn-toggle-auth-inner').addEventListener('click', () => {
@@ -245,47 +246,83 @@ document.getElementById('btn-toggle-auth').addEventListener('click', () => {
 });
 
 document.getElementById('auth-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const user = document.getElementById('auth-username').value.trim();
-    const pass = document.getElementById('auth-password').value.trim();
     const email = document.getElementById('auth-email').value.trim();
+    const pass = document.getElementById('auth-password').value.trim();
+    const username = document.getElementById('auth-username').value.trim();
     const errEl = document.getElementById('auth-error');
+    errEl.style.display = 'none';
+
+    const { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendEmailVerification, updateProfile } = window.firebaseAuth;
 
     if (isLoginMode) {
         // Login
         try {
-            if (!window.dbAPI) throw new Error("DB not loaded");
-            const dbUser = await window.dbAPI.getUser(user);
-            if (dbUser && dbUser.pass === pass) {
-                currentUser = user;
-                sessionStorage.setItem('elec_user', user);
-                localStorage.setItem('elec_user', user);
-                loginSuccess();
-            } else {
-                throw new Error("Invalid");
+            const userCredential = await signInWithEmailAndPassword(auth, email, pass);
+            const user = userCredential.user;
+
+            if (!user.emailVerified) {
+                errEl.innerText = "Lütfen e-postanızı doğrulayın! Size bir doğrulama linki gönderdik.";
+                errEl.style.display = 'block';
+                await auth.signOut();
+                return;
             }
+
+            currentUser = user.displayName || user.email;
+            loginSuccess();
         } catch (err) {
-            errEl.innerText = translate('err_auth');
+            console.error(err);
+            errEl.innerText = "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.";
             errEl.style.display = 'block';
         }
     } else {
         // Register
         try {
-            await window.dbAPI.addUser({ username: user, email, pass });
-            currentUser = user;
-            sessionStorage.setItem('elec_user', user);
-            localStorage.setItem('elec_user', user);
-            loginSuccess();
+            const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
+            const user = userCredential.user;
+
+            // Set display name (username)
+            await updateProfile(user, { displayName: username });
+
+            // Send verification email
+            await sendEmailVerification(user);
+
+            // Show verification notice
+            document.getElementById('auth-form').style.display = 'none';
+            document.getElementById('verify-notice').style.display = 'block';
+            document.getElementById('verify-email-display').innerText = email;
+
         } catch (err) {
-            errEl.innerText = err;
+            console.error(err);
+            errEl.innerText = "Kayıt başarısız: " + (err.message || "Bilinmeyen bir hata oluştu.");
             errEl.style.display = 'block';
         }
     }
 });
 
-document.getElementById('btn-logout').addEventListener('click', () => {
-    sessionStorage.removeItem('elec_user');
-    localStorage.removeItem('elec_user');
+// Resend verification
+document.getElementById('btn-resend-verify')?.addEventListener('click', async () => {
+    const { auth, sendEmailVerification } = window.firebaseAuth;
+    if (auth.currentUser) {
+        try {
+            await sendEmailVerification(auth.currentUser);
+            alert("Doğrulama e-postası tekrar gönderildi.");
+        } catch (err) {
+            alert("Hata: " + err.message);
+        }
+    }
+});
+
+// Back to login after registration
+document.getElementById('btn-back-to-login')?.addEventListener('click', () => {
+    document.getElementById('verify-notice').style.display = 'none';
+    document.getElementById('auth-form').style.display = 'flex';
+    isLoginMode = true;
+    document.getElementById('btn-toggle-auth').click(); // Sync UI state
+});
+
+document.getElementById('btn-logout').addEventListener('click', async () => {
+    const { auth, signOut } = window.firebaseAuth;
+    await signOut(auth);
     currentUser = null;
     document.getElementById('auth-form').reset();
     showScreen('auth-screen');
@@ -320,13 +357,23 @@ const initEfficiencyToggles = () => {
     handleToggle('tog-3ph-eta', 'cont-3ph-eta');
 };
 
-// Check session on load
+// Check session on load with Firebase Listener
 window.addEventListener('load', () => {
-    const sess = sessionStorage.getItem('elec_user') || localStorage.getItem('elec_user');
-    if (sess) {
-        currentUser = sess;
-        loginSuccess();
-    }
+    // Wait for firebaseAuth to be available
+    const checkAuth = setInterval(() => {
+        if (window.firebaseAuth) {
+            clearInterval(checkAuth);
+            const { auth, onAuthStateChanged } = window.firebaseAuth;
+            onAuthStateChanged(auth, (user) => {
+                if (user && user.emailVerified) {
+                    currentUser = user.displayName || user.email;
+                    loginSuccess();
+                } else {
+                    showScreen('auth-screen');
+                }
+            });
+        }
+    }, 100);
 });
 
 
