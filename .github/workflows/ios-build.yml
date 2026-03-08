@@ -35,6 +35,11 @@ jobs:
           chmod +x ./node_modules/.bin/cap || true
           npx cap update ios
 
+      - name: Install CocoaPods
+        run: |
+          cd ios/App
+          pod install
+
       - name: Build iOS App (Archive)
         run: |
           cd ios/App
