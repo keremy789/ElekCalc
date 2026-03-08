@@ -1,0 +1,61 @@
+name: Build iOS App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Capacitor iOS
+        run: npm install @capacitor/ios
+
+      - name: Add iOS Platform
+        run: npx cap add ios
+
+      - name: Copy web assets to iOS project
+        run: npx cap copy ios
+
+      - name: Update iOS project
+        run: npx cap update ios
+
+      - name: Build iOS App (Archive)
+        run: |
+          cd ios/App
+          xcodebuild -workspace App.xcworkspace \
+            -scheme App \
+            -configuration Release \
+            -archivePath $PWD/build/App.xcarchive \
+            clean archive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Export IPA
+        run: |
+          cd ios/App
+          # Since we are building without signing, we manually package it into a Payload/App.ipa structure.
+          mkdir -p Payload
+          mv build/App.xcarchive/Products/Applications/App.app Payload/
+          zip -r App.ipa Payload
+
+      - name: Upload IPA Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: ElekCalc-iOS-App
+          path: ios/App/App.ipa
