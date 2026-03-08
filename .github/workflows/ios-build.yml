@@ -25,10 +25,11 @@ jobs:
       - name: Install Capacitor iOS
         run: npm install @capacitor/ios
 
-      - name: Copy web assets to iOS project
+      - name: Recreate iOS Platform
         run: |
           chmod +x ./node_modules/.bin/cap || true
-          npx cap copy ios
+          rm -rf ios
+          npx cap add ios
 
       - name: Update iOS project
         run: |
