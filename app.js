@@ -247,6 +247,7 @@ document.getElementById('btn-toggle-auth').addEventListener('click', () => {
 });
 
 document.getElementById('auth-form').addEventListener('submit', async (e) => {
+    e.preventDefault(); // CRITICAL: prevent page reload on async form submit
     const email = document.getElementById('auth-email').value.trim();
     const pass = document.getElementById('auth-password').value.trim();
     const username = document.getElementById('auth-username').value.trim();
