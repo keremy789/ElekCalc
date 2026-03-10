@@ -344,11 +344,76 @@ if (resendBtn) {
         if (auth.currentUser) {
             try {
                 await sendEmailVerification(auth.currentUser);
-                alert("Doğrulama e-postası tekrar gönderildi.");
+                resendBtn.innerText = 'Gönderildi ✓';
+                resendBtn.disabled = true;
             } catch (err) {
-                alert("Hata: " + err.message);
+                resendBtn.innerText = 'Hata: ' + err.message;
             }
         }
+    });
+}
+
+// "Giriş Yap" button inside verify-notice (direct link)
+const verifyGoLoginBtn = document.getElementById('btn-verify-go-login');
+if (verifyGoLoginBtn) {
+    verifyGoLoginBtn.addEventListener('click', () => {
+        document.getElementById('btn-back-to-login').click();
+    });
+}
+
+// Şifremi Unuttum toggle
+const forgotPwBtn = document.getElementById('btn-forgot-pw');
+const forgotPwPanel = document.getElementById('forgot-pw-panel');
+if (forgotPwBtn && forgotPwPanel) {
+    forgotPwBtn.addEventListener('click', () => {
+        const isOpen = forgotPwPanel.style.display !== 'none';
+        forgotPwPanel.style.display = isOpen ? 'none' : 'block';
+        forgotPwBtn.innerText = isOpen ? 'Şifremi Unuttum' : 'Vazgeç';
+    });
+}
+
+// Şifremi Unuttum - Link Gönder
+const sendResetBtn = document.getElementById('btn-send-reset');
+if (sendResetBtn) {
+    sendResetBtn.addEventListener('click', async () => {
+        const email = document.getElementById('forgot-pw-email').value.trim();
+        const msg = document.getElementById('forgot-pw-msg');
+        if (!email) {
+            msg.style.color = '#ef4444';
+            msg.innerText = 'Lütfen e-posta adresinizi girin.';
+            return;
+        }
+        try {
+            sendResetBtn.disabled = true;
+            sendResetBtn.innerText = 'Gönderiliyor...';
+            const { auth, sendPasswordResetEmail } = window.firebaseAuth;
+            await sendPasswordResetEmail(auth, email);
+            msg.style.color = '#22c55e';
+            msg.innerText = 'şifre sıfırlama linki gönderildi! Mail kutunuzu kontrol edin.';
+            sendResetBtn.innerText = 'Gönderildi ✓';
+        } catch (err) {
+            msg.style.color = '#ef4444';
+            msg.innerText = 'Hata: ' + err.message;
+            sendResetBtn.disabled = false;
+            sendResetBtn.innerText = 'Link Gönder';
+        }
+    });
+}
+
+// Beni Hatırla - Firebase persistence
+const rememberChk = document.getElementById('chk-remember');
+if (rememberChk) {
+    rememberChk.addEventListener('change', async () => {
+        // Wait for firebase to load
+        if (!window.firebaseAuth) return;
+        const authInstance = window.firebaseAuth.auth;
+        // LOCAL = persist even after browser close; SESSION = clear on close
+        const persistenceType = rememberChk.checked ? 'local' : 'session';
+        try {
+            await authInstance.setPersistence(persistenceType === 'local'
+                ? firebase.auth.Auth.Persistence.LOCAL
+                : firebase.auth.Auth.Persistence.SESSION);
+        } catch (e) { /* ignore */ }
     });
 }
 

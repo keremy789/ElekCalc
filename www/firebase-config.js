@@ -24,5 +24,6 @@ window.firebaseAuth = {
     sendEmailVerification: (user) => user.sendEmailVerification(),
     signOut: (auth) => auth.signOut(),
     onAuthStateChanged: (auth, callback) => auth.onAuthStateChanged(callback),
-    updateProfile: (user, data) => user.updateProfile(data)
+    updateProfile: (user, data) => user.updateProfile(data),
+    sendPasswordResetEmail: (auth, email) => auth.sendPasswordResetEmail(email)
 };
