@@ -8,6 +8,7 @@ let currentUser = null;
 let currentLang = 'tr';
 let isDarkTheme = true;
 let isLoginMode = true; // true = Login view, false = Register view
+let isRegistering = false; // Guard: prevent onAuthStateChanged from resetting UI during registration
 
 // --- Translation Dictionary ---
 const i18n = {
@@ -283,6 +284,7 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
     } else {
         // Register
         try {
+            isRegistering = true; // Prevent onAuthStateChanged from resetting UI
             errEl.style.color = '#3b82f6';
             errEl.innerText = "Hesabınız oluşturuluyor, lütfen bekleyin...";
             errEl.style.display = 'block';
@@ -320,6 +322,8 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
             errEl.style.color = '#ef4444';
             errEl.innerText = "Kayıt başarısız: " + (err.message || "Bilinmeyen bir hata oluştu.");
             errEl.style.display = 'block';
+        } finally {
+            isRegistering = false; // Always reset flag
         }
     }
 
@@ -399,6 +403,7 @@ window.addEventListener('load', () => {
             clearInterval(checkAuth);
             const { auth, onAuthStateChanged } = window.firebaseAuth;
             onAuthStateChanged(auth, (user) => {
+                if (isRegistering) return; // Skip during registration flow
                 if (user && user.emailVerified) {
                     currentUser = user.displayName || user.email;
                     loginSuccess();
