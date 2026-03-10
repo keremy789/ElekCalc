@@ -303,13 +303,19 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
                 await sendEmailVerification(user);
             } catch (emailErr) {
                 console.error("Verification email failed:", emailErr);
-                errEl.style.color = '#ef4444';
-                errEl.innerText = "Kayıt başarılı ancak doğrulama e-postası gönderilemedi: " + emailErr.message;
-                return; // Stop here if email fails
+                // Still sign out and show notice even if email fails
+                errEl.style.color = '#ef8c44';
+                errEl.innerText = "Hesap oluşturuldu! E-posta gönderilemedi ama hesabınız aktif.";
             }
+
+            // Sign out immediately - user must verify email before logging in
+            try {
+                await auth.signOut();
+            } catch (so) { /* ignore signout errors */ }
 
             // Show verification notice
             errEl.style.display = 'none';
+            isRegistering = false; // Reset flag BEFORE showing notice
             const authForm = document.getElementById('auth-form');
             const verifyNotice = document.getElementById('verify-notice');
             if (authForm) authForm.style.display = 'none';
@@ -323,7 +329,7 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
             errEl.innerText = "Kayıt başarısız: " + (err.message || "Bilinmeyen bir hata oluştu.");
             errEl.style.display = 'block';
         } finally {
-            isRegistering = false; // Always reset flag
+            if (isRegistering) isRegistering = false; // Only reset if not already done
         }
     }
 
