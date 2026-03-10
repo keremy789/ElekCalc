@@ -257,12 +257,16 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
     if (isLoginMode) {
         // Login
         try {
+            errEl.style.color = '#3b82f6';
+            errEl.innerText = "Giriş yapılıyor, lütfen bekleyin...";
+            errEl.style.display = 'block';
+
             const userCredential = await signInWithEmailAndPassword(auth, email, pass);
             const user = userCredential.user;
-            alert("Giriş denemesi başarılı, doğrulama kontrol ediliyor...");
 
             if (!user.emailVerified) {
-                errEl.innerText = "Lütfen e-postanızı doğrulayın! Size bir doğrulama linki gönderdik.";
+                errEl.style.color = '#ef4444';
+                errEl.innerText = "Lütfen e-postanızı doğrulayın! Kayıt olurken size bir link gönderdik.";
                 errEl.style.display = 'block';
                 await auth.signOut();
                 return;
@@ -272,16 +276,19 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
             loginSuccess();
         } catch (err) {
             console.error(err);
+            errEl.style.color = '#ef4444';
             errEl.innerText = "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.";
             errEl.style.display = 'block';
         }
     } else {
         // Register
         try {
-            alert("Kayıt işlemi başlıyor...");
+            errEl.style.color = '#3b82f6';
+            errEl.innerText = "Hesabınız oluşturuluyor, lütfen bekleyin...";
+            errEl.style.display = 'block';
+
             const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
             const user = userCredential.user;
-            alert("Hesap oluşturuldu: " + user.email);
 
             // Set display name (username)
             if (username) {
@@ -289,17 +296,18 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
             }
 
             // Send verification email
+            errEl.innerText = "Doğrulama e-postası gönderiliyor...";
             try {
-                alert("Doğrulama e-postası gönderiliyor...");
                 await sendEmailVerification(user);
-                alert("E-posta gönderim komutu başarılı.");
             } catch (emailErr) {
                 console.error("Verification email failed:", emailErr);
-                alert("Doğrulama e-postası gönderilemedi: " + emailErr.message);
+                errEl.style.color = '#ef4444';
+                errEl.innerText = "Kayıt başarılı ancak doğrulama e-postası gönderilemedi: " + emailErr.message;
+                return; // Stop here if email fails
             }
 
             // Show verification notice
-            alert("Bilgilendirme kutusu açılıyor...");
+            errEl.style.display = 'none';
             const authForm = document.getElementById('auth-form');
             const verifyNotice = document.getElementById('verify-notice');
             if (authForm) authForm.style.display = 'none';
@@ -309,10 +317,12 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
 
         } catch (err) {
             console.error(err);
+            errEl.style.color = '#ef4444';
             errEl.innerText = "Kayıt başarısız: " + (err.message || "Bilinmeyen bir hata oluştu.");
             errEl.style.display = 'block';
         }
     }
+
 });
 
 // Resend verification
