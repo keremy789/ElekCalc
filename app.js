@@ -356,12 +356,20 @@ if (resendBtn) {
 const backToLoginBtn = document.getElementById('btn-back-to-login');
 if (backToLoginBtn) {
     backToLoginBtn.addEventListener('click', () => {
+        // Reset verify notice
         document.getElementById('verify-notice').style.display = 'none';
+        // Show the auth form in login mode
         const authForm = document.getElementById('auth-form');
-        if (authForm) authForm.style.display = 'flex';
-        isLoginMode = true;
-        const toggleBtn = document.getElementById('btn-toggle-auth');
-        if (toggleBtn) toggleBtn.click(); // Sync UI state
+        if (authForm) {
+            authForm.style.display = 'flex';
+            authForm.reset();
+        }
+        // Reset to login mode
+        isLoginMode = false; // Force it to be "register" so toggle switches it to "login"
+        document.getElementById('btn-toggle-auth').click();
+        // Clear any error messages
+        const errEl = document.getElementById('auth-error');
+        if (errEl) errEl.style.display = 'none';
     });
 }
 
