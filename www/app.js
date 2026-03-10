@@ -356,17 +356,25 @@ if (resendBtn) {
 const backToLoginBtn = document.getElementById('btn-back-to-login');
 if (backToLoginBtn) {
     backToLoginBtn.addEventListener('click', () => {
-        // Reset verify notice
+        // Hide verify notice
         document.getElementById('verify-notice').style.display = 'none';
-        // Show the auth form in login mode
+        // Show the auth form
         const authForm = document.getElementById('auth-form');
         if (authForm) {
             authForm.style.display = 'flex';
             authForm.reset();
         }
-        // Reset to login mode
-        isLoginMode = false; // Force it to be "register" so toggle switches it to "login"
-        document.getElementById('btn-toggle-auth').click();
+        // Directly set everything to LOGIN mode (don't rely on toggle button)
+        isLoginMode = true;
+        document.getElementById('auth-title').innerText = 'Giriş Yap';
+        document.getElementById('btn-auth-submit').innerText = 'Giriş Yap';
+        document.getElementById('group-username').style.display = 'none';
+        document.getElementById('auth-username').required = false;
+        document.getElementById('auth-toggle-text').innerHTML =
+            `<span>${translate('no_account')}</span> <button type="button" class="btn-text" id="btn-toggle-auth-inner"><span>${translate('register')}</span></button>`;
+        // Rebind the inner toggle
+        const inner = document.getElementById('btn-toggle-auth-inner');
+        if (inner) inner.addEventListener('click', () => document.getElementById('btn-toggle-auth').click());
         // Clear any error messages
         const errEl = document.getElementById('auth-error');
         if (errEl) errEl.style.display = 'none';
