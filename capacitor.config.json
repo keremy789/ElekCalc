@@ -4,5 +4,13 @@
   "webDir": "www",
   "ios": {
     "backgroundColor": "#121212"
+  },
+  "plugins": {
+    "CapacitorHttp": {
+      "enabled": true
+    },
+    "CapacitorCookies": {
+      "enabled": true
+    }
   }
 }
