@@ -409,13 +409,11 @@ window.addEventListener('load', () => {
             clearInterval(checkAuth);
             const { auth, onAuthStateChanged } = window.firebaseAuth;
             onAuthStateChanged(auth, (user) => {
-                if (isRegistering) return; // Skip during registration flow
                 if (user && user.emailVerified) {
                     currentUser = user.displayName || user.email;
                     loginSuccess();
-                } else {
-                    showScreen('auth-screen');
                 }
+                // Auth screen is the default state in HTML - no need to reset here
             });
         }
     }, 100);
