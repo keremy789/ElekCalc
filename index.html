@@ -64,7 +64,8 @@
         <div id="auth-error" class="error-msg" style="display: none;"></div>
 
         <!-- Beni Hatırla + Şifremi Unuttum -->
-        <div style="display:flex; justify-content:space-between; align-items:center; margin: 0.2rem 0 0.5rem;">
+        <div id="login-extras-row"
+          style="display:flex; justify-content:space-between; align-items:center; margin: 0.2rem 0 0.5rem;">
           <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; cursor:pointer;">
             <input type="checkbox" id="chk-remember" style="width:16px;height:16px;accent-color:var(--primary);">
             Beni Hatırla
@@ -87,11 +88,19 @@
           Yap</button>
       </form>
 
-      <div class="auth-footer">
-        <p id="auth-toggle-text">
+      <div class="auth-footer" id="auth-footer-container">
+        <!-- Login modunda gösterilir -->
+        <p id="footer-login-mode">
           <span data-i18n="no_account">Hesabınız yok mu?</span>
-          <button type="button" class="btn-text" id="btn-toggle-auth" data-action="register">
+          <button type="button" class="btn-text" id="btn-toggle-auth">
             <span data-i18n="register">Kayıt Ol</span>
+          </button>
+        </p>
+        <!-- Register modunda gösterilir -->
+        <p id="footer-register-mode" style="display:none;">
+          <span data-i18n="has_account">Zaten hesabınız var mı?</span>
+          <button type="button" class="btn-text" id="btn-toggle-auth-register">
+            <span data-i18n="login">Giriş Yap</span>
           </button>
         </p>
       </div>
@@ -148,7 +157,7 @@
             <div class="toggle-group mt-2">
               <label data-i18n="use_efficiency">Verim Dahil Edilsin mi?</label>
               <label class="toggle-switch">
-                <input type="checkbox" id="tog-1ph-eta" checked>
+                <input type="checkbox" id="tog-1ph-eta">
                 <span class="slider"></span>
               </label>
             </div>
@@ -197,7 +206,7 @@
             <div class="toggle-group mt-2">
               <label data-i18n="use_efficiency">Verim Dahil Edilsin mi?</label>
               <label class="toggle-switch">
-                <input type="checkbox" id="tog-3ph-eta" checked>
+                <input type="checkbox" id="tog-3ph-eta">
                 <span class="slider"></span>
               </label>
             </div>
@@ -247,43 +256,14 @@
       <section id="tab-kvar" class="tab-content">
         <h2 class="tab-title" data-i18n="tab_kvar">kVAR / Kompanzasyon</h2>
 
-        <!-- Calculator 1: Find Required kVAR -->
+        <!-- Calculator: Find Current from kVAR -->
         <div class="glass-card">
-          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">⚡ Gerekli Kondansatör (kVAR) Hesabı</h3>
-          <form class="calculator-form" id="form-kvar">
-            <div class="input-group">
-              <label data-i18n="active_power">Aktif Güç (kW)</label>
-              <input type="number" id="inp-kv-p" required step="0.1" />
-            </div>
-            <div class="input-group mt-2">
-              <label data-i18n="voltage">Sistem Gerilimi (V)</label>
-              <input type="number" id="inp-kv-v" value="400" step="1" required />
-            </div>
-            <div class="input-row mt-2">
-              <div class="input-group">
-                <label data-i18n="current_pf">Mevcut cosφ₁</label>
-                <input type="number" id="inp-kv-pf1" value="0.70" step="0.01" min="0" max="1" required />
-              </div>
-              <div class="input-group">
-                <label data-i18n="target_pf">Hedef cosφ₂</label>
-                <input type="number" id="inp-kv-pf2" value="0.95" step="0.01" min="0" max="1" required />
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block mt-3">
-              <i class="ph ph-chart-line-up"></i> <span data-i18n="calculate">Hesapla</span>
-            </button>
-          </form>
-        </div>
-        <div id="res-kvar" class="result-card glass-card hidden"></div>
-
-        <!-- Calculator 2: Find Current from kVAR -->
-        <div class="glass-card mt-3">
-          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">🔌 Kondansatör Akımı (A) Hesabı</h3>
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">🔌 Kompanzasyon Panosu Ana Şalteri</h3>
           <form class="calculator-form" id="form-kvar-current">
             <div class="input-row">
               <div class="input-group">
-                <label>Kondansatör Gücü (kVAR)</label>
-                <input type="number" id="inp-kvc-q" required step="0.1" placeholder="Örn: 25" />
+                <label>Toplam Pano / Kondansatör (kVAR)</label>
+                <input type="number" id="inp-kvc-q" required step="0.1" placeholder="Örn: 100" />
               </div>
               <div class="input-group">
                 <label data-i18n="voltage">Sistem Gerilimi (V)</label>
@@ -291,7 +271,7 @@
               </div>
             </div>
             <button type="submit" class="btn btn-secondary btn-block mt-3">
-              <i class="ph ph-lightning"></i> Akımı Hesapla
+              <i class="ph ph-lightning"></i> Şalteri Hesapla
             </button>
           </form>
           <div id="res-kvar-current" class="result-card glass-card hidden"></div>

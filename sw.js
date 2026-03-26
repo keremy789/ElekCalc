@@ -1,5 +1,5 @@
 /* cache-first offline service worker */
-const CACHE_NAME = 'elec-calc-v2';
+const CACHE_NAME = 'elec-calc-v3';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',

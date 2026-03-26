@@ -229,22 +229,28 @@ const switchTab = (targetId) => {
 
 // --- Auth Logic ---
 
-document.getElementById('btn-toggle-auth').addEventListener('click', () => {
-    isLoginMode = !isLoginMode;
-    document.getElementById('auth-title').innerText = isLoginMode ? translate('login') : translate('register');
-    document.getElementById('btn-auth-submit').innerText = isLoginMode ? translate('login') : translate('register');
-    document.getElementById('auth-toggle-text').innerHTML = isLoginMode
-        ? `<span data-i18n="no_account">${translate('no_account')}</span> <button type="button" class="btn-text" id="btn-toggle-auth-inner"><span data-i18n="register">${translate('register')}</span></button>`
-        : `<span data-i18n="has_account">${translate('has_account')}</span> <button type="button" class="btn-text" id="btn-toggle-auth-inner"><span data-i18n="login">${translate('login')}</span></button>`;
+// Merkezi mod switchleme fonksiyonu
+const setAuthMode = (loginMode) => {
+    isLoginMode = loginMode;
+    document.getElementById('auth-title').innerText = loginMode ? translate('login') : translate('register');
+    document.getElementById('btn-auth-submit').innerText = loginMode ? translate('login') : translate('register');
+    document.getElementById('group-username').style.display = loginMode ? 'none' : 'flex';
+    document.getElementById('auth-username').required = !loginMode;
+    document.getElementById('login-extras-row').style.display = loginMode ? 'flex' : 'none';
+    document.getElementById('footer-login-mode').style.display = loginMode ? 'block' : 'none';
+    document.getElementById('footer-register-mode').style.display = loginMode ? 'none' : 'block';
+    const fpp = document.getElementById('forgot-pw-panel');
+    if (fpp) fpp.style.display = 'none';
+    const fbtn = document.getElementById('btn-forgot-pw');
+    if (fbtn) fbtn.innerText = 'Şifremi Unuttum';
+    const errEl = document.getElementById('auth-error');
+    if (errEl) errEl.style.display = 'none';
+};
 
-    document.getElementById('group-username').style.display = isLoginMode ? 'none' : 'flex';
-    document.getElementById('auth-username').required = !isLoginMode;
+document.getElementById('btn-toggle-auth').addEventListener('click', () => setAuthMode(false));
+document.getElementById('btn-toggle-auth-register').addEventListener('click', () => setAuthMode(true));
 
-    // Re-bind dynamic button
-    document.getElementById('btn-toggle-auth-inner').addEventListener('click', () => {
-        document.getElementById('btn-toggle-auth').click();
-    });
-});
+
 
 document.getElementById('auth-form').addEventListener('submit', async (e) => {
     e.preventDefault(); // CRITICAL: prevent page reload on async form submit
@@ -275,6 +281,13 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
             }
 
             currentUser = user.displayName || user.email;
+            // Beni Hatırla işaretliyse emaili kaydet
+            const remChk = document.getElementById('chk-remember');
+            if (remChk && remChk.checked) {
+                localStorage.setItem('rememberedEmail', email);
+            } else {
+                localStorage.removeItem('rememberedEmail');
+            }
             loginSuccess();
         } catch (err) {
             console.error(err);
@@ -319,7 +332,9 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
             isRegistering = false; // Reset flag BEFORE showing notice
             const authForm = document.getElementById('auth-form');
             const verifyNotice = document.getElementById('verify-notice');
+            const authFooter = document.getElementById('auth-footer-container');
             if (authForm) authForm.style.display = 'none';
+            if (authFooter) authFooter.style.display = 'none';
             if (verifyNotice) verifyNotice.style.display = 'block';
             const emailDisplay = document.getElementById('verify-email-display');
             if (emailDisplay) emailDisplay.innerText = email;
@@ -421,36 +436,30 @@ if (rememberChk) {
 const backToLoginBtn = document.getElementById('btn-back-to-login');
 if (backToLoginBtn) {
     backToLoginBtn.addEventListener('click', () => {
-        // Hide verify notice
         document.getElementById('verify-notice').style.display = 'none';
-        // Show the auth form
         const authForm = document.getElementById('auth-form');
         if (authForm) {
             authForm.style.display = 'flex';
             authForm.reset();
         }
-        // Directly set everything to LOGIN mode (don't rely on toggle button)
-        isLoginMode = true;
-        document.getElementById('auth-title').innerText = 'Giriş Yap';
-        document.getElementById('btn-auth-submit').innerText = 'Giriş Yap';
-        document.getElementById('group-username').style.display = 'none';
-        document.getElementById('auth-username').required = false;
-        document.getElementById('auth-toggle-text').innerHTML =
-            `<span>${translate('no_account')}</span> <button type="button" class="btn-text" id="btn-toggle-auth-inner"><span>${translate('register')}</span></button>`;
-        // Rebind the inner toggle
-        const inner = document.getElementById('btn-toggle-auth-inner');
-        if (inner) inner.addEventListener('click', () => document.getElementById('btn-toggle-auth').click());
-        // Clear any error messages
-        const errEl = document.getElementById('auth-error');
-        if (errEl) errEl.style.display = 'none';
+        const authFooter = document.getElementById('auth-footer-container');
+        if (authFooter) authFooter.style.display = 'block';
+        setAuthMode(true);
     });
 }
+
 
 document.getElementById('btn-logout').addEventListener('click', async () => {
     const { auth, signOut } = window.firebaseAuth;
     await signOut(auth);
     currentUser = null;
     document.getElementById('auth-form').reset();
+    // Beni Hatırla aktifse emaili geri yaz
+    const rememberedEmail = localStorage.getItem('rememberedEmail');
+    if (rememberedEmail) {
+        document.getElementById('auth-email').value = rememberedEmail;
+        document.getElementById('chk-remember').checked = true;
+    }
     showScreen('auth-screen');
 });
 
@@ -485,6 +494,12 @@ const initEfficiencyToggles = () => {
 
 // Check session on load with Firebase Listener
 window.addEventListener('load', () => {
+    // Beni Hatırla: kayıtlı email varsa forma yaz
+    const rememberedEmail = localStorage.getItem('rememberedEmail');
+    if (rememberedEmail) {
+        document.getElementById('auth-email').value = rememberedEmail;
+        document.getElementById('chk-remember').checked = true;
+    }
     // Wait for firebaseAuth to be available
     const checkAuth = setInterval(() => {
         if (window.firebaseAuth) {
@@ -500,6 +515,7 @@ window.addEventListener('load', () => {
         }
     }, 100);
 });
+
 
 
 // --- Top Header Logic ---
@@ -712,27 +728,6 @@ document.getElementById('form-trafo').addEventListener('submit', (e) => {
 });
 
 
-// 4. kVAR
-document.getElementById('form-kvar').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const p = parseFloat(document.getElementById('inp-kv-p').value);
-    const v = parseFloat(document.getElementById('inp-kv-v').value) || 400;
-    const pf1 = parseFloat(document.getElementById('inp-kv-pf1').value);
-    const pf2 = parseFloat(document.getElementById('inp-kv-pf2').value);
-
-    const tan1 = Math.tan(Math.acos(pf1));
-    const tan2 = Math.tan(Math.acos(pf2));
-
-    const qc = p * (tan1 - tan2);
-    const ic = (qc * 1000) / (Math.sqrt(3) * v); // Now uses dynamic voltage
-
-    lastCalcResult = { type: 'KVAR', inputs: { p, v, pf1, pf2 }, results: { qc, ic } };
-
-    renderResult('res-kvar', [
-        { label: translate('res_q_req'), value: badge(`${qc.toFixed(2)} kVAR`, 'green') },
-        { label: translate('res_cap_i'), value: `${ic.toFixed(2)} A (${v}V için)` }
-    ]);
-});
 
 // 4.1. kVAR to Current (New Feature)
 document.getElementById('form-kvar-current').addEventListener('submit', (e) => {
@@ -745,13 +740,19 @@ document.getElementById('form-kvar-current').addEventListener('submit', (e) => {
     // Ic = (Qc * 1000) / (√3 × V)
     const ic = (q * 1000) / (Math.sqrt(3) * v);
 
-    lastCalcResult = { type: 'KVAR_CURRENT', inputs: { q, v }, results: { ic } };
+    // IEC Endüstriyel standart: Kompanzasyon panosu ana şalteri ve kablosu In * 1.5 olarak seçilir.
+    const ic_safe = ic * 1.5;
+    const breaker = getBreaker(ic_safe);
+
+    lastCalcResult = { type: 'KVAR_CURRENT', inputs: { q, v }, results: { ic, breaker } };
 
     renderResult('res-kvar-current', [
-        { label: 'Girilen Kondansatör (kVAR)', value: `${q} kVAR` },
-        { label: 'Sistem Gerilimi (V)', value: `${v} V` },
-        { label: 'Kondansatör Akımı (Ic)', value: badge(`${ic.toFixed(2)} A`, 'blue') },
-        { label: 'Sigorta (Kapasitif Karakterli)', value: badge(`${getBreaker(ic)} A (min)`, 'green') }
+        { label: 'Pano/Kondansatör Gücü', value: `${q} kVAR` },
+        { label: 'Nominal Akım (In)', value: `${ic.toFixed(2)} A` },
+        { label: 'Tasarım Akımı (In × 1.5)', value: `${ic_safe.toFixed(2)} A` },
+        { label: 'Önerilen Ana Şalter / TMŞ', value: badge(`${breaker} A`, 'green') }
+    ], [
+        '💡 IEC standartlarına göre kapasitif yüklerde harmonikler ve deşarj akımları nedeniyle şalter ve kablo kesiti nominal akımın en az 1.35 - 1.5 katı olarak tasarlanmalıdır. Hesaplamada 1.5 çarpanı kullanılmıştır.'
     ]);
 });
 
@@ -1045,54 +1046,54 @@ document.getElementById('form-busbar').addEventListener('submit', (e) => {
     if (I <= 250) {
         barra = "20 x 5";
         barraN = "20 x 5";
-        barraPE = "20 x 3 veya 12x5";
+        barraPE = "20 x 3 veya 15x5"; // ~50-60mm2 (1/2 of 100mm2)
     }
     else if (I <= 400) {
         barra = "30 x 5";
         barraN = nIsHalf ? "20 x 5" : "30 x 5";
-        barraPE = nIsHalf ? "20 x 3" : "15 x 5";
+        barraPE = "15 x 5";
     }
     else if (I <= 630) {
         barra = "40 x 10";
         barraN = nIsHalf ? "40 x 5" : "40 x 10";
-        barraPE = nIsHalf ? "20 x 5" : "40 x 5";
+        barraPE = "40 x 5";
     }
     else if (I <= 800) {
         barra = "50 x 10";
         barraN = nIsHalf ? "50 x 5" : "50 x 10";
-        barraPE = nIsHalf ? "25 x 5" : "50 x 5";
+        barraPE = "50 x 5";
     }
     else if (I <= 1000) {
         barra = "60 x 10";
         barraN = nIsHalf ? "30 x 10" : "60 x 10";
-        barraPE = nIsHalf ? "30 x 5" : "30 x 10";
+        barraPE = "30 x 10";
     }
     else if (I <= 1250) {
         barra = "80 x 10";
         barraN = nIsHalf ? "40 x 10" : "80 x 10";
-        barraPE = nIsHalf ? "40 x 5" : "40 x 10";
+        barraPE = "40 x 10";
     }
     else if (I <= 1600) {
         barra = "100 x 10";
         barraN = nIsHalf ? "50 x 10" : "100 x 10";
-        barraPE = nIsHalf ? "50 x 5" : "50 x 10";
+        barraPE = "50 x 10";
     }
     else if (I <= 2000) {
         barra = "2 x (60 x 10)";
         barraN = nIsHalf ? "1 x (60 x 10)" : "2 x (60 x 10)";
-        barraPE = nIsHalf ? "1 x (30 x 10)" : "1 x (60 x 10)";
+        barraPE = "1 x (60 x 10)";
         count = "2";
     }
     else if (I <= 2500) {
         barra = "2 x (80 x 10)";
         barraN = nIsHalf ? "1 x (80 x 10)" : "2 x (80 x 10)";
-        barraPE = nIsHalf ? "1 x (40 x 10)" : "1 x (80 x 10)";
+        barraPE = "1 x (80 x 10)";
         count = "2";
     }
     else if (I <= 3200) {
         barra = "2 x (100 x 10)";
         barraN = nIsHalf ? "1 x (100 x 10)" : "2 x (100 x 10)";
-        barraPE = nIsHalf ? "1 x (50 x 10)" : "1 x (100 x 10)";
+        barraPE = "1 x (100 x 10)";
         count = "2";
     }
     else { barra = "Özel Hesaplama Gerekli"; barraN = "-"; barraPE = "-"; count = "-"; color = "red"; }
