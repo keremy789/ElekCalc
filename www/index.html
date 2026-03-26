@@ -64,7 +64,8 @@
         <div id="auth-error" class="error-msg" style="display: none;"></div>
 
         <!-- Beni Hatırla + Şifremi Unuttum -->
-        <div style="display:flex; justify-content:space-between; align-items:center; margin: 0.2rem 0 0.5rem;">
+        <div id="login-extras-row"
+          style="display:flex; justify-content:space-between; align-items:center; margin: 0.2rem 0 0.5rem;">
           <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; cursor:pointer;">
             <input type="checkbox" id="chk-remember" style="width:16px;height:16px;accent-color:var(--primary);">
             Beni Hatırla
@@ -88,10 +89,18 @@
       </form>
 
       <div class="auth-footer" id="auth-footer-container">
-        <p id="auth-toggle-text">
+        <!-- Login modunda gösterilir -->
+        <p id="footer-login-mode">
           <span data-i18n="no_account">Hesabınız yok mu?</span>
-          <button type="button" class="btn-text" id="btn-toggle-auth" data-action="register">
+          <button type="button" class="btn-text" id="btn-toggle-auth">
             <span data-i18n="register">Kayıt Ol</span>
+          </button>
+        </p>
+        <!-- Register modunda gösterilir -->
+        <p id="footer-register-mode" style="display:none;">
+          <span data-i18n="has_account">Zaten hesabınız var mı?</span>
+          <button type="button" class="btn-text" id="btn-toggle-auth-register">
+            <span data-i18n="login">Giriş Yap</span>
           </button>
         </p>
       </div>

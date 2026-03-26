@@ -229,31 +229,28 @@ const switchTab = (targetId) => {
 
 // --- Auth Logic ---
 
-document.getElementById('btn-toggle-auth').addEventListener('click', () => {
-    isLoginMode = !isLoginMode;
-    document.getElementById('auth-title').innerText = isLoginMode ? translate('login') : translate('register');
-    document.getElementById('btn-auth-submit').innerText = isLoginMode ? translate('login') : translate('register');
-    document.getElementById('auth-toggle-text').innerHTML = isLoginMode
-        ? `<span data-i18n="no_account">${translate('no_account')}</span> <button type="button" class="btn-text" id="btn-toggle-auth-inner"><span data-i18n="register">${translate('register')}</span></button>`
-        : `<span data-i18n="has_account">${translate('has_account')}</span> <button type="button" class="btn-text" id="btn-toggle-auth-inner"><span data-i18n="login">${translate('login')}</span></button>`;
-
-    document.getElementById('group-username').style.display = isLoginMode ? 'none' : 'flex';
-    document.getElementById('auth-username').required = !isLoginMode;
-
-    // Beni Hatırla/Şifremi Unuttum satırı sadece login modunda görünür
-    const loginExtrasRow = document.querySelector('#auth-form > div[style*="justify-content:space-between"]');
-    if (loginExtrasRow) loginExtrasRow.style.display = isLoginMode ? 'flex' : 'none';
-    // Şifremi unuttum panelini kapat
+// Merkezi mod switchleme fonksiyonu
+const setAuthMode = (loginMode) => {
+    isLoginMode = loginMode;
+    document.getElementById('auth-title').innerText = loginMode ? translate('login') : translate('register');
+    document.getElementById('btn-auth-submit').innerText = loginMode ? translate('login') : translate('register');
+    document.getElementById('group-username').style.display = loginMode ? 'none' : 'flex';
+    document.getElementById('auth-username').required = !loginMode;
+    document.getElementById('login-extras-row').style.display = loginMode ? 'flex' : 'none';
+    document.getElementById('footer-login-mode').style.display = loginMode ? 'block' : 'none';
+    document.getElementById('footer-register-mode').style.display = loginMode ? 'none' : 'block';
     const fpp = document.getElementById('forgot-pw-panel');
     if (fpp) fpp.style.display = 'none';
     const fbtn = document.getElementById('btn-forgot-pw');
     if (fbtn) fbtn.innerText = 'Şifremi Unuttum';
+    const errEl = document.getElementById('auth-error');
+    if (errEl) errEl.style.display = 'none';
+};
 
-    // Re-bind dynamic button
-    document.getElementById('btn-toggle-auth-inner').addEventListener('click', () => {
-        document.getElementById('btn-toggle-auth').click();
-    });
-});
+document.getElementById('btn-toggle-auth').addEventListener('click', () => setAuthMode(false));
+document.getElementById('btn-toggle-auth-register').addEventListener('click', () => setAuthMode(true));
+
+
 
 document.getElementById('auth-form').addEventListener('submit', async (e) => {
     e.preventDefault(); // CRITICAL: prevent page reload on async form submit
@@ -432,9 +429,7 @@ if (rememberChk) {
 const backToLoginBtn = document.getElementById('btn-back-to-login');
 if (backToLoginBtn) {
     backToLoginBtn.addEventListener('click', () => {
-        // Hide verify notice
         document.getElementById('verify-notice').style.display = 'none';
-        // Show the auth form & footer
         const authForm = document.getElementById('auth-form');
         if (authForm) {
             authForm.style.display = 'flex';
@@ -442,28 +437,10 @@ if (backToLoginBtn) {
         }
         const authFooter = document.getElementById('auth-footer-container');
         if (authFooter) authFooter.style.display = 'block';
-        // Directly set everything to LOGIN mode (don't rely on toggle button)
-        isLoginMode = true;
-        document.getElementById('auth-title').innerText = 'Giriş Yap';
-        document.getElementById('btn-auth-submit').innerText = 'Giriş Yap';
-        document.getElementById('group-username').style.display = 'none';
-        document.getElementById('auth-username').required = false;
-        // Beni Hatırla/Şifremi Unuttum satırını geri göster (login modunda)
-        const loginExtrasRow = document.querySelector('#auth-form > div[style*="justify-content:space-between"]');
-        if (loginExtrasRow) loginExtrasRow.style.display = 'flex';
-        // Şifremi unuttum panelini kapat
-        const fpp = document.getElementById('forgot-pw-panel');
-        if (fpp) fpp.style.display = 'none';
-        document.getElementById('auth-toggle-text').innerHTML =
-            `<span>${translate('no_account')}</span> <button type="button" class="btn-text" id="btn-toggle-auth-inner"><span>${translate('register')}</span></button>`;
-        // Rebind the inner toggle
-        const inner = document.getElementById('btn-toggle-auth-inner');
-        if (inner) inner.addEventListener('click', () => document.getElementById('btn-toggle-auth').click());
-        // Clear any error messages
-        const errEl = document.getElementById('auth-error');
-        if (errEl) errEl.style.display = 'none';
+        setAuthMode(true);
     });
 }
+
 
 document.getElementById('btn-logout').addEventListener('click', async () => {
     const { auth, signOut } = window.firebaseAuth;
