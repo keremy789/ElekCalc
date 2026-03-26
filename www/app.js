@@ -761,13 +761,19 @@ document.getElementById('form-kvar-current').addEventListener('submit', (e) => {
     // Ic = (Qc * 1000) / (√3 × V)
     const ic = (q * 1000) / (Math.sqrt(3) * v);
 
-    lastCalcResult = { type: 'KVAR_CURRENT', inputs: { q, v }, results: { ic } };
+    // IEC Endüstriyel standart: Kompanzasyon panosu ana şalteri ve kablosu In * 1.5 olarak seçilir.
+    const ic_safe = ic * 1.5;
+    const breaker = getBreaker(ic_safe);
+
+    lastCalcResult = { type: 'KVAR_CURRENT', inputs: { q, v }, results: { ic, breaker } };
 
     renderResult('res-kvar-current', [
-        { label: 'Girilen Kondansatör (kVAR)', value: `${q} kVAR` },
-        { label: 'Sistem Gerilimi (V)', value: `${v} V` },
-        { label: 'Kondansatör Akımı (Ic)', value: badge(`${ic.toFixed(2)} A`, 'blue') },
-        { label: 'Sigorta (Kapasitif Karakterli)', value: badge(`${getBreaker(ic)} A (min)`, 'green') }
+        { label: 'Pano/Kondansatör Gücü', value: `${q} kVAR` },
+        { label: 'Nominal Akım (In)', value: `${ic.toFixed(2)} A` },
+        { label: 'Tasarım Akımı (In × 1.5)', value: `${ic_safe.toFixed(2)} A` },
+        { label: 'Önerilen Ana Şalter / TMŞ', value: badge(`${breaker} A`, 'green') }
+    ], [
+        '💡 IEC standartlarına göre kapasitif yüklerde harmonikler ve deşarj akımları nedeniyle şalter ve kablo kesiti nominal akımın en az 1.35 - 1.5 katı olarak tasarlanmalıdır. Hesaplamada 1.5 çarpanı kullanılmıştır.'
     ]);
 });
 
