@@ -281,6 +281,13 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
             }
 
             currentUser = user.displayName || user.email;
+            // Beni Hatırla işaretliyse emaili kaydet
+            const remChk = document.getElementById('chk-remember');
+            if (remChk && remChk.checked) {
+                localStorage.setItem('rememberedEmail', email);
+            } else {
+                localStorage.removeItem('rememberedEmail');
+            }
             loginSuccess();
         } catch (err) {
             console.error(err);
@@ -447,6 +454,12 @@ document.getElementById('btn-logout').addEventListener('click', async () => {
     await signOut(auth);
     currentUser = null;
     document.getElementById('auth-form').reset();
+    // Beni Hatırla aktifse emaili geri yaz
+    const rememberedEmail = localStorage.getItem('rememberedEmail');
+    if (rememberedEmail) {
+        document.getElementById('auth-email').value = rememberedEmail;
+        document.getElementById('chk-remember').checked = true;
+    }
     showScreen('auth-screen');
 });
 
@@ -481,6 +494,12 @@ const initEfficiencyToggles = () => {
 
 // Check session on load with Firebase Listener
 window.addEventListener('load', () => {
+    // Beni Hatırla: kayıtlı email varsa forma yaz
+    const rememberedEmail = localStorage.getItem('rememberedEmail');
+    if (rememberedEmail) {
+        document.getElementById('auth-email').value = rememberedEmail;
+        document.getElementById('chk-remember').checked = true;
+    }
     // Wait for firebaseAuth to be available
     const checkAuth = setInterval(() => {
         if (window.firebaseAuth) {
@@ -496,6 +515,7 @@ window.addEventListener('load', () => {
         }
     }, 100);
 });
+
 
 
 // --- Top Header Logic ---
