@@ -728,27 +728,6 @@ document.getElementById('form-trafo').addEventListener('submit', (e) => {
 });
 
 
-// 4. kVAR
-document.getElementById('form-kvar').addEventListener('submit', (e) => {
-    e.preventDefault();
-    const p = parseFloat(document.getElementById('inp-kv-p').value);
-    const v = parseFloat(document.getElementById('inp-kv-v').value) || 400;
-    const pf1 = parseFloat(document.getElementById('inp-kv-pf1').value);
-    const pf2 = parseFloat(document.getElementById('inp-kv-pf2').value);
-
-    const tan1 = Math.tan(Math.acos(pf1));
-    const tan2 = Math.tan(Math.acos(pf2));
-
-    const qc = p * (tan1 - tan2);
-    const ic = (qc * 1000) / (Math.sqrt(3) * v); // Now uses dynamic voltage
-
-    lastCalcResult = { type: 'KVAR', inputs: { p, v, pf1, pf2 }, results: { qc, ic } };
-
-    renderResult('res-kvar', [
-        { label: translate('res_q_req'), value: badge(`${qc.toFixed(2)} kVAR`, 'green') },
-        { label: translate('res_cap_i'), value: `${ic.toFixed(2)} A (${v}V için)` }
-    ]);
-});
 
 // 4.1. kVAR to Current (New Feature)
 document.getElementById('form-kvar-current').addEventListener('submit', (e) => {
