@@ -1061,54 +1061,54 @@ document.getElementById('form-busbar').addEventListener('submit', (e) => {
     if (I <= 250) {
         barra = "20 x 5";
         barraN = "20 x 5";
-        barraPE = "20 x 3 veya 12x5";
+        barraPE = "20 x 3 veya 15x5"; // ~50-60mm2 (1/2 of 100mm2)
     }
     else if (I <= 400) {
         barra = "30 x 5";
         barraN = nIsHalf ? "20 x 5" : "30 x 5";
-        barraPE = nIsHalf ? "20 x 3" : "15 x 5";
+        barraPE = "15 x 5";
     }
     else if (I <= 630) {
         barra = "40 x 10";
         barraN = nIsHalf ? "40 x 5" : "40 x 10";
-        barraPE = nIsHalf ? "20 x 5" : "40 x 5";
+        barraPE = "40 x 5";
     }
     else if (I <= 800) {
         barra = "50 x 10";
         barraN = nIsHalf ? "50 x 5" : "50 x 10";
-        barraPE = nIsHalf ? "25 x 5" : "50 x 5";
+        barraPE = "50 x 5";
     }
     else if (I <= 1000) {
         barra = "60 x 10";
         barraN = nIsHalf ? "30 x 10" : "60 x 10";
-        barraPE = nIsHalf ? "30 x 5" : "30 x 10";
+        barraPE = "30 x 10";
     }
     else if (I <= 1250) {
         barra = "80 x 10";
         barraN = nIsHalf ? "40 x 10" : "80 x 10";
-        barraPE = nIsHalf ? "40 x 5" : "40 x 10";
+        barraPE = "40 x 10";
     }
     else if (I <= 1600) {
         barra = "100 x 10";
         barraN = nIsHalf ? "50 x 10" : "100 x 10";
-        barraPE = nIsHalf ? "50 x 5" : "50 x 10";
+        barraPE = "50 x 10";
     }
     else if (I <= 2000) {
         barra = "2 x (60 x 10)";
         barraN = nIsHalf ? "1 x (60 x 10)" : "2 x (60 x 10)";
-        barraPE = nIsHalf ? "1 x (30 x 10)" : "1 x (60 x 10)";
+        barraPE = "1 x (60 x 10)";
         count = "2";
     }
     else if (I <= 2500) {
         barra = "2 x (80 x 10)";
         barraN = nIsHalf ? "1 x (80 x 10)" : "2 x (80 x 10)";
-        barraPE = nIsHalf ? "1 x (40 x 10)" : "1 x (80 x 10)";
+        barraPE = "1 x (80 x 10)";
         count = "2";
     }
     else if (I <= 3200) {
         barra = "2 x (100 x 10)";
         barraN = nIsHalf ? "1 x (100 x 10)" : "2 x (100 x 10)";
-        barraPE = nIsHalf ? "1 x (50 x 10)" : "1 x (100 x 10)";
+        barraPE = "1 x (100 x 10)";
         count = "2";
     }
     else { barra = "Özel Hesaplama Gerekli"; barraN = "-"; barraPE = "-"; count = "-"; color = "red"; }
