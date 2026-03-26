@@ -127,7 +127,7 @@ h3 {
 .input-group {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: 0.4rem;
 }
 
