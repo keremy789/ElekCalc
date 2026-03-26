@@ -76,6 +76,103 @@ const i18n = {
         busbar_calc: "Bakır Bara Seçim Hesaplayıcı",
         neutral_half: "Nötr Kesiti Yarısı (%50) mı?",
         tab_busbar: "Bakır Bara Seçimi",
+        kvar_title: "🔌 Kompanzasyon Panosu Ana Şalteri",
+        kvar_total: "Toplam Pano / Kondansatör (kVAR)",
+        kvar_calc: "Şalteri Hesapla",
+        yd_motor_i_alt: "Motor Akımı (A) — Alternatif",
+        vd_phase: "Sistem Tipi",
+        vd_phase_3: "Trifaze (3Φ)",
+        vd_phase_1: "Monofaze (1Φ)",
+        vd_mat: "İletken Tipi",
+        vd_mat_cu: "Bakır (Cu)",
+        vd_mat_al: "Alüminyum (Al)",
+        vd_len: "Kablo Uzunluğu (m)",
+        vd_area: "Kablo Kesiti (mm²)",
+        isc_uk: "Kısa Devre Empedansı Uk% (genellikle 4–6%)",
+        tools_hpkw: "⚙️ HP ↔ kW Dönüştürücü",
+        tools_hp: "HP (Beygir Gücü)",
+        tools_kw: "kW",
+        tools_ss: "🔁 Soft-Starter Devreye Alma Akımı",
+        tools_ss_inom: "Motor Akımı I_nom (A)",
+        tools_ss_mult: "Devreye Alma Çarpanı",
+        tools_ss_mult_2: "2× (Hafif Yük)",
+        tools_ss_mult_3: "3× (Normal)",
+        tools_ss_mult_4: "4× (Ağır Yük)",
+        tools_light: "💡 Aydınlatma Hesabı",
+        tools_lt_area: "Alan (m²)",
+        tools_lt_lux: "Hedef Lüks (lx)",
+        tools_lt_lx_100: "100 lx — Depo/Koridor",
+        tools_lt_lx_200: "200 lx — Merdiven",
+        tools_lt_lx_300: "300 lx — Ofis/Atölye",
+        tools_lt_lx_500: "500 lx — Teknik Ofis",
+        tools_lt_lx_750: "750 lx — Hassas İşlem",
+        tools_lt_pw: "Armatür Gücü (W)",
+        tools_lt_eff: "Armatür Verimliliği (lm/W)",
+        tools_ip: "🛡️ IP Koruma Sınıfı Rehberi",
+        ip_solid: "Katı Koruma",
+        ip_liquid: "Sıvı Koruma",
+        ip_use: "Kullanım Yeri",
+        ip_finger: "Parmak",
+        ip_none: "Yok",
+        ip_tool_25: "Alet > 2.5mm",
+        ip_tool_1: "Tel > 1mm",
+        ip_dust_part: "Toz kısmi",
+        ip_dust_full: "Tam toz",
+        ip_drop_v: "Düşey damlama",
+        ip_splash: "Her yönden sıçrama",
+        ip_jet: "Su jeti",
+        ip_sub_1m: "1m suya dalmaya",
+        ip_sub_cont: "Sürekli dalma",
+        ip_loc_in: "Dahili pano",
+        ip_loc_in_pan: "İç mekan pano",
+        ip_loc_in_dist: "İç mekan dağıtım",
+        ip_loc_in_ctrl: "İç mekan kontrol",
+        ip_loc_in_term: "İç mekan terminal",
+        ip_loc_gen: "Genel amaçlı",
+        ip_loc_out_damp: "Açık / nemli",
+        ip_loc_out_motor: "Dış ortam motor",
+        ip_loc_ind_out: "Sanayi / dış",
+        ip_loc_wash: "Yıkama alanları",
+        ip_loc_under: "Sualtı pompa",
+        tools_hp_to_kw: "HP → kW",
+        tools_kw_to_hp: "kW → HP",
+        
+        err_kvar_fill: "Lütfen güç ve gerilim değerlerini girin.",
+        res_kvar_q: "Pano/Kondansatör Gücü",
+        res_kvar_in: "Nominal Akım (In)",
+        res_kvar_id: "Tasarım Akımı (In × 1.5)",
+        res_kvar_cb: "Önerilen Ana Şalter / TMŞ",
+        tip_kvar_iec: "IEC standartlarına göre kapasitif yüklerde harmonikler ve deşarj akımları nedeniyle şalter ve kablo kesiti nominal akımın en az 1.35 - 1.5 katı olarak tasarlanmalıdır. Hesaplamada 1.5 çarpanı kullanılmıştır.",
+        err_yd_v: "Gerilim giriniz.",
+        err_yd_p_i: "Motor gücü (kW) veya akım (A) giriniz.",
+        res_yd_inom: "Motor Nominal Akımı (I)",
+        res_yd_fuse: "Motor Sigortası",
+        res_yd_km: "KM — Ana Kontaktör  (I)",
+        res_yd_ky: "KY — Yıldız Kontaktör  (I/√3)",
+        res_yd_kd: "KΔ — Üçgen Kontaktör  (I)",
+        res_yd_term: "Termik Röle Ayar Akımı",
+        tip_yd_cont: "⚡ KM ve KΔ kontaktörleri aynı boyutta seçilir (tam hat akımı = I). Yalnızca KY daha küçük seçilir (I/√3 ≈ 0.578 × I).",
+        err_fill_all: "Lütfen tüm alanları doldurun.",
+        res_vd_v: "Gerilim Düşümü (ΔU)",
+        res_vd_pct: "Düşüm Yüzdesi (ΔU%)",
+        res_vd_arr: "Varış Gerilimi",
+        res_vd_state: "Durum",
+        res_isc_in: "Nominal Sekonder Akım (I_n)",
+        res_isc_3ph: "Üç Faz K.D. Akımı (I_sc)",
+        res_isc_1ph: "T.F. K.D. Akımı (yakl.)",
+        res_isc_cb: "Ana Sigorta Önerisi",
+        err_ss_i: "Motor nominal akımını giriniz.",
+        res_ss_inom: "Nominal Motor Akımı",
+        res_lt_flux: "Gerekli Toplam Işık Akısı",
+        res_lt_fix: "Armatür Başına Işık Akısı",
+        res_lt_num: "Gerekli Armatür Sayısı",
+        res_lt_p: "Toplam Kurulu Güç",
+        res_lt_i: "Tahmini Yük Akımı (230V)",
+        tip_lt_maint: "Bakım faktörü 0.80 alınmıştır. Gerçek hesap için oda tipi ve reflektans değerlerini göz önünde bulundurun.",
+        res_ss_demaraj: "Devreye Alma Akımı",
+        res_ss_cb: "Önerilen Motor Sigortası",
+        res_trafo_sec_cb: "Sekonder Ana Şalter",
+        res_trafo_cab: "Örnek Ana Kablo",
         nav_busbar: "Bara"
     },
     en: {
@@ -142,6 +239,103 @@ const i18n = {
         busbar_calc: "Copper Busbar Selection Calculator",
         neutral_half: "Neutral Cross-section Half (%50)?",
         tab_busbar: "Copper Busbar Selection",
+        kvar_title: "🔌 Power Factor Panel Main Breaker",
+        kvar_total: "Total Panel / Capacitor (kVAR)",
+        kvar_calc: "Calculate Breaker",
+        yd_motor_i_alt: "Motor Current (A) — Alternative",
+        vd_phase: "System Type",
+        vd_phase_3: "Three-Phase (3Φ)",
+        vd_phase_1: "Single-Phase (1Φ)",
+        vd_mat: "Conductor Type",
+        vd_mat_cu: "Copper (Cu)",
+        vd_mat_al: "Aluminum (Al)",
+        vd_len: "Cable Length (m)",
+        vd_area: "Cable Cross-Section (mm²)",
+        isc_uk: "Short Circuit Impedance Uk% (typically 4-6%)",
+        tools_hpkw: "⚙️ HP ↔ kW Converter",
+        tools_hp: "HP (Horsepower)",
+        tools_kw: "kW",
+        tools_ss: "🔁 Soft-Starter Startup Current",
+        tools_ss_inom: "Motor Current I_nom (A)",
+        tools_ss_mult: "Startup Multiplier",
+        tools_ss_mult_2: "2× (Light Load)",
+        tools_ss_mult_3: "3× (Normal)",
+        tools_ss_mult_4: "4× (Heavy Load)",
+        tools_light: "💡 Lighting Calculator",
+        tools_lt_area: "Area (m²)",
+        tools_lt_lux: "Target Lux (lx)",
+        tools_lt_lx_100: "100 lx — Storage/Corridor",
+        tools_lt_lx_200: "200 lx — Stairs",
+        tools_lt_lx_300: "300 lx — Office/Workshop",
+        tools_lt_lx_500: "500 lx — Technical Office",
+        tools_lt_lx_750: "750 lx — Precision Work",
+        tools_lt_pw: "Fixture Power (W)",
+        tools_lt_eff: "Fixture Efficiency (lm/W)",
+        tools_ip: "🛡️ IP Protection Guide",
+        ip_solid: "Solid Protection",
+        ip_liquid: "Liquid Protection",
+        ip_use: "Typical Use",
+        ip_finger: "Fingers",
+        ip_none: "None",
+        ip_tool_25: "Tool > 2.5mm",
+        ip_tool_1: "Wire > 1mm",
+        ip_dust_part: "Dust protected",
+        ip_dust_full: "Dust tight",
+        ip_drop_v: "Vertical drops",
+        ip_splash: "Splashing water",
+        ip_jet: "Water jets",
+        ip_sub_1m: "Immersion up to 1m",
+        ip_sub_cont: "Continuous immersion",
+        ip_loc_in: "Indoor panel",
+        ip_loc_in_pan: "Indoor enclosure",
+        ip_loc_in_dist: "Indoor distribution",
+        ip_loc_in_ctrl: "Indoor control",
+        ip_loc_in_term: "Indoor terminal",
+        ip_loc_gen: "General purpose",
+        ip_loc_out_damp: "Outdoor / damp",
+        ip_loc_out_motor: "Outdoor motor",
+        ip_loc_ind_out: "Industrial / outdoor",
+        ip_loc_wash: "Washdown areas",
+        ip_loc_under: "Underwater pump",
+        tools_hp_to_kw: "HP → kW",
+        tools_kw_to_hp: "kW → HP",
+        
+        err_kvar_fill: "Please enter power and voltage values.",
+        res_kvar_q: "Panel/Capacitor Power",
+        res_kvar_in: "Nominal Current (In)",
+        res_kvar_id: "Design Current (In × 1.5)",
+        res_kvar_cb: "Recommended Main Breaker / MCCB",
+        tip_kvar_iec: "According to IEC standards, the breaker and cable cross-section should be designed as at least 1.35-1.5 times the nominal current due to harmonics and discharge currents in capacitive loads. A multiplier of 1.5 is used in the calculation.",
+        err_yd_v: "Please enter voltage.",
+        err_yd_p_i: "Please enter motor power (kW) or current (A).",
+        res_yd_inom: "Motor Nominal Current (I)",
+        res_yd_fuse: "Motor Breaker",
+        res_yd_km: "KM — Main Contactor (I)",
+        res_yd_ky: "KY — Star Contactor (I/√3)",
+        res_yd_kd: "KΔ — Delta Contactor (I)",
+        res_yd_term: "Thermal Relay Setting Current",
+        tip_yd_cont: "⚡ KM and KΔ contactors are selected in the same size (full line current = I). Only KY is selected smaller (I/√3 ≈ 0.578 × I).",
+        err_fill_all: "Please fill in all fields.",
+        res_vd_v: "Voltage Drop (ΔU)",
+        res_vd_pct: "Drop Percentage (ΔU%)",
+        res_vd_arr: "Arrival Voltage",
+        res_vd_state: "Status",
+        res_isc_in: "Nominal Secondary Current (I_n)",
+        res_isc_3ph: "3-Phase S.C. Current (I_sc)",
+        res_isc_1ph: "1-Phase S.C. Current (approx.)",
+        res_isc_cb: "Main Breaker Recommendation",
+        err_ss_i: "Please enter motor nominal current.",
+        res_ss_inom: "Nominal Motor Current",
+        res_lt_flux: "Required Total Luminous Flux",
+        res_lt_fix: "Luminous Flux per Fixture",
+        res_lt_num: "Required Number of Fixtures",
+        res_lt_p: "Total Installed Power",
+        res_lt_i: "Estimated Load Current (230V)",
+        tip_lt_maint: "Maintenance factor 0.80 is used. Consider room type and reflectance values for actual calculation.",
+        res_ss_demaraj: "Startup Current",
+        res_ss_cb: "Recommended Motor Breaker",
+        res_trafo_sec_cb: "Secondary Main Breaker",
+        res_trafo_cab: "Example Main Cable",
         nav_busbar: "Busbar"
     }
 };
@@ -722,8 +916,8 @@ document.getElementById('form-trafo').addEventListener('submit', (e) => {
     renderResult('res-trafo', [
         { label: translate('res_pri_i'), value: `${pI.toFixed(2)} A` },
         { label: translate('res_sec_i'), value: `${sI.toFixed(2)} A` },
-        { label: 'Sekonder Ana Şalter', value: badge(`${cb} A TMŞ`, 'green') },
-        { label: 'Örnek Ana Kablo', value: badge(`${cab.size} mm² (Muhtemel Paralel)`, 'yellow') }
+        { label: translate('res_trafo_sec_cb'), value: badge(`${cb} A TMŞ`, 'green') },
+        { label: translate('res_trafo_cab'), value: badge(`${cab.size} mm² (Muhtemel Paralel)`, 'yellow') }
     ]);
 });
 
@@ -735,7 +929,7 @@ document.getElementById('form-kvar-current').addEventListener('submit', (e) => {
     const q = parseFloat(document.getElementById('inp-kvc-q').value);
     const v = parseFloat(document.getElementById('inp-kvc-v').value);
 
-    if (isNaN(q) || isNaN(v)) return alert('Lütfen güç ve gerilim değerlerini girin.');
+    if (isNaN(q) || isNaN(v)) return alert(translate('err_kvar_fill'));
 
     // Ic = (Qc * 1000) / (√3 × V)
     const ic = (q * 1000) / (Math.sqrt(3) * v);
@@ -747,10 +941,10 @@ document.getElementById('form-kvar-current').addEventListener('submit', (e) => {
     lastCalcResult = { type: 'KVAR_CURRENT', inputs: { q, v }, results: { ic, breaker } };
 
     renderResult('res-kvar-current', [
-        { label: 'Pano/Kondansatör Gücü', value: `${q} kVAR` },
-        { label: 'Nominal Akım (In)', value: `${ic.toFixed(2)} A` },
-        { label: 'Tasarım Akımı (In × 1.5)', value: `${ic_safe.toFixed(2)} A` },
-        { label: 'Önerilen Ana Şalter / TMŞ', value: badge(`${breaker} A`, 'green') }
+        { label: translate('res_kvar_q'), value: `${q} kVAR` },
+        { label: translate('res_kvar_in'), value: `${ic.toFixed(2)} A` },
+        { label: translate('res_kvar_id'), value: `${ic_safe.toFixed(2)} A` },
+        { label: translate('res_kvar_cb'), value: badge(`${breaker} A`, 'green') }
     ], [
         '💡 IEC standartlarına göre kapasitif yüklerde harmonikler ve deşarj akımları nedeniyle şalter ve kablo kesiti nominal akımın en az 1.35 - 1.5 katı olarak tasarlanmalıdır. Hesaplamada 1.5 çarpanı kullanılmıştır.'
     ]);
@@ -772,8 +966,8 @@ document.getElementById('form-yd').addEventListener('submit', (e) => {
     let I = parseFloat(document.getElementById('inp-yd-i').value);
     const rt3 = Math.sqrt(3);
 
-    if (isNaN(v)) return alert('Gerilim giriniz.');
-    if (isNaN(p) && isNaN(I)) return alert('Motor gücü (kW) veya akım (A) giriniz.');
+    if (isNaN(v)) return alert(translate('err_yd_v'));
+    if (isNaN(p) && isNaN(I)) return alert(translate('err_yd_p_i'));
 
     // Derive missing value
     if (!isNaN(p) && isNaN(I)) {
@@ -802,14 +996,14 @@ document.getElementById('form-yd').addEventListener('submit', (e) => {
     lastCalcResult = { type: 'STAR_DELTA', inputs: { v, p, I, pf }, results: { I_km, I_ky, I_kdel, I_term } };
 
     renderResult('res-yd', [
-        { label: 'Motor Nominal Akımı (I)', value: `${I.toFixed(2)} A` },
-        { label: 'Motor Sigortası', value: badge(`${cb} A`, 'green') },
-        { label: 'KM — Ana Kontaktör  (I)', value: badge(`min. ${km} A   (${I_km.toFixed(2)} A)`, 'green') },
-        { label: 'KY — Yıldız Kontaktör  (I/√3)', value: badge(`min. ${ky} A   (${I_ky.toFixed(2)} A)`, 'blue') },
-        { label: 'KΔ — Üçgen Kontaktör  (I)', value: badge(`min. ${kd} A   (${I_kdel.toFixed(2)} A)`, 'green') },
-        { label: 'Termik Röle Ayar Akımı', value: badge(`${I_term.toFixed(2)} A (= I_nom)`, 'yellow') },
+        { label: translate('res_yd_inom'), value: `${I.toFixed(2)} A` },
+        { label: translate('res_yd_fuse'), value: badge(`${cb} A`, 'green') },
+        { label: translate('res_yd_km'), value: badge(`min. ${km} A   (${I_km.toFixed(2)} A)`, 'green') },
+        { label: translate('res_yd_ky'), value: badge(`min. ${ky} A   (${I_ky.toFixed(2)} A)`, 'blue') },
+        { label: translate('res_yd_kd'), value: badge(`min. ${kd} A   (${I_kdel.toFixed(2)} A)`, 'green') },
+        { label: translate('res_yd_term'), value: badge(`${I_term.toFixed(2)} A (= I_nom)`, 'yellow') },
     ], [
-        '⚡ KM ve KΔ kontaktörleri aynı boyutta seçilir (tam hat akımı = I). Yalnızca KY daha küçük seçilir (I/√3 ≈ 0.578 × I).',
+        translate('tip_yd_cont'),
         I > 30 ? 'AI Önerisi: Bu güç seviyesinde geçiş süresi (Y→Δ) 5–8 sn arası ayarlanmalıdır.' : '',
         p > 18.5 ? 'AI Önerisi: Devreye alma süreci kritik; alternatif olarak Soft-Starter değerlendirilebilir.' : ''
     ].filter(Boolean));
@@ -932,7 +1126,7 @@ document.getElementById('form-vdrop').addEventListener('submit', (e) => {
     const L = parseFloat(document.getElementById('inp-vd-len').value);
     const A = parseFloat(document.getElementById('inp-vd-area').value);
 
-    if ([v, I, L, A].some(isNaN)) return alert('Lütfen tüm alanları doldurun.');
+    if ([v, I, L, A].some(isNaN)) return alert(translate('err_fill_all'));
 
     // ΔU = (k × ρ × L × I) / A   where k=2 for 1-ph, √3 for 3-ph
     const k = phase === 1 ? 2 : Math.sqrt(3);
@@ -946,10 +1140,10 @@ document.getElementById('form-vdrop').addEventListener('submit', (e) => {
     lastCalcResult = { type: 'VDROP', inputs: { v, I, L, A, phase }, results: { dU, pct } };
 
     renderResult('res-vdrop', [
-        { label: 'Gerilim Düşümü (ΔU)', value: badge(`${dU.toFixed(2)} V`, col) },
-        { label: 'Düşüm Yüzdesi (ΔU%)', value: badge(`${pct.toFixed(2)} %`, col) },
-        { label: 'Varış Gerilimi', value: `${(v - dU).toFixed(1)} V` },
-        { label: 'Durum', value: badge(status, col) },
+        { label: translate('res_vd_v'), value: badge(`${dU.toFixed(2)} V`, col) },
+        { label: translate('res_vd_pct'), value: badge(`${pct.toFixed(2)} %`, col) },
+        { label: translate('res_vd_arr'), value: `${(v - dU).toFixed(1)} V` },
+        { label: translate('res_vd_state'), value: badge(status, col) },
     ], pct > 3 ? ['AI Önerisi: Gerilim düşümü IEC sınırını aşıyor. Kablo kesitini büyütün veya hattı kısaltın.'] : []);
 });
 
@@ -961,7 +1155,7 @@ document.getElementById('form-isc').addEventListener('submit', (e) => {
     const uk = parseFloat(document.getElementById('inp-isc-uk').value);
     const rt3 = Math.sqrt(3);
 
-    if ([kva, v, uk].some(isNaN)) return alert('Lütfen tüm alanları doldurun.');
+    if ([kva, v, uk].some(isNaN)) return alert(translate('err_fill_all'));
 
     // Isc = S / (√3 × V × Uk)
     const I_nom = (kva * 1000) / (rt3 * v);        // Nominal secondary current
@@ -973,10 +1167,10 @@ document.getElementById('form-isc').addEventListener('submit', (e) => {
     lastCalcResult = { type: 'ISC', inputs: { kva, v, uk }, results: { I_nom, I_sc } };
 
     renderResult('res-isc', [
-        { label: 'Nominal Sekonder Akım (I_n)', value: `${I_nom.toFixed(1)} A` },
-        { label: 'Üç Faz K.D. Akımı (I_sc)', value: badge(`${(I_sc / 1000).toFixed(2)} kA`, 'red') },
-        { label: 'T.F. K.D. Akımı (yakl.)', value: badge(`${(I_sc1ph / 1000).toFixed(2)} kA`, 'yellow') },
-        { label: 'Ana Sigorta Önerisi', value: badge(`${cb_main} A`, 'green') },
+        { label: translate('res_isc_in'), value: `${I_nom.toFixed(1)} A` },
+        { label: translate('res_isc_3ph'), value: badge(`${(I_sc / 1000).toFixed(2)} kA`, 'red') },
+        { label: translate('res_isc_1ph'), value: badge(`${(I_sc1ph / 1000).toFixed(2)} kA`, 'yellow') },
+        { label: translate('res_isc_cb'), value: badge(`${cb_main} A`, 'green') },
     ], [
         `AI Önerisi: Uk=${uk}% için kesici kesme kapasitesi en az ${(I_sc / 1000).toFixed(1)} kA olmalıdır.`,
         'Kablo ve şalter seçiminde kısa devre akımının etkileri göz önünde bulundurulmalıdır.'
@@ -989,15 +1183,15 @@ document.getElementById('form-ss').addEventListener('submit', (e) => {
     const I = parseFloat(document.getElementById('inp-ss-i').value);
     const mult = parseFloat(document.getElementById('inp-ss-mult').value);
 
-    if (isNaN(I)) return alert('Motor nominal akımını giriniz.');
+    if (isNaN(I)) return alert(translate('err_ss_i'));
 
     const I_start = I * mult;
     const cb = getBreaker(I * 1.25);
 
     renderResult('res-ss', [
-        { label: 'Nominal Motor Akımı', value: `${I.toFixed(2)} A` },
-        { label: `Devreye Alma Akımı (×${mult})`, value: badge(`${I_start.toFixed(2)} A`, 'yellow') },
-        { label: 'Önerilen Motor Sigortası', value: badge(`${cb} A`, 'green') },
+        { label: translate('res_ss_inom'), value: `${I.toFixed(2)} A` },
+        { label: `${translate('res_ss_demaraj')} (×${mult})`, value: badge(`${I_start.toFixed(2)} A`, 'yellow') },
+        { label: translate('res_ss_cb'), value: badge(`${cb} A`, 'green') },
     ], ['Soft-Starter devreye alma akımını motor tipine ve yüke göre 2×–4× arasında ayarlayabilirsiniz.']);
 });
 
@@ -1009,7 +1203,7 @@ document.getElementById('form-light').addEventListener('submit', (e) => {
     const w = parseFloat(document.getElementById('inp-lt-w').value);
     const lumW = parseFloat(document.getElementById('inp-lt-eff').value);
 
-    if ([area, lux, w, lumW].some(isNaN)) return alert('Lütfen tüm alanları doldurun.');
+    if ([area, lux, w, lumW].some(isNaN)) return alert(translate('err_fill_all'));
 
     // Required total lumens (maintenance factor 0.80)
     const totalLm = (area * lux) / 0.80;
@@ -1019,12 +1213,12 @@ document.getElementById('form-light').addEventListener('submit', (e) => {
     const I_load = (totalW / 1000) / (0.23 * 0.9); // Assume 230V, cosφ=0.9, 1-phase
 
     renderResult('res-light', [
-        { label: 'Gerekli Toplam Işık Akısı', value: `${Math.round(totalLm).toLocaleString()} lm` },
-        { label: 'Armatür Başına Işık Akısı', value: `${Math.round(lumPerFix)} lm` },
-        { label: 'Gerekli Armatür Sayısı', value: badge(`${numFix} adet`, 'green') },
-        { label: 'Toplam Kurulu Güç', value: `${totalW} W` },
-        { label: 'Tahmini Yük Akımı (230V)', value: `${I_load.toFixed(2)} A` },
-    ], [`Bakım faktörü 0.80 alınmıştır. Gerçek hesap için oda tipi ve reflektans değerlerini göz önünde bulundurun.`]);
+        { label: translate('res_lt_flux'), value: `${Math.round(totalLm).toLocaleString()} lm` },
+        { label: translate('res_lt_fix'), value: `${Math.round(lumPerFix)} lm` },
+        { label: translate('res_lt_num'), value: badge(`${numFix} adet`, 'green') },
+        { label: translate('res_lt_p'), value: `${totalW} W` },
+        { label: translate('res_lt_i'), value: `${I_load.toFixed(2)} A` },
+    ], [translate('tip_lt_maint')]);
 });
 
 // ===== 10. HP <-> kW Converter =====

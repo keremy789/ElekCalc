@@ -258,11 +258,12 @@
 
         <!-- Calculator: Find Current from kVAR -->
         <div class="glass-card">
-          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">🔌 Kompanzasyon Panosu Ana Şalteri</h3>
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;" data-i18n="kvar_title">🔌 Kompanzasyon Panosu Ana Şalteri
+          </h3>
           <form class="calculator-form" id="form-kvar-current">
             <div class="input-row">
               <div class="input-group">
-                <label>Toplam Pano / Kondansatör (kVAR)</label>
+                <label data-i18n="kvar_total">Toplam Pano / Kondansatör (kVAR)</label>
                 <input type="number" id="inp-kvc-q" required step="0.1" placeholder="Örn: 100" />
               </div>
               <div class="input-group">
@@ -271,7 +272,7 @@
               </div>
             </div>
             <button type="submit" class="btn btn-secondary btn-block mt-3">
-              <i class="ph ph-lightning"></i> Şalteri Hesapla
+              <i class="ph ph-lightning"></i> <span data-i18n="kvar_calc">Şalteri Hesapla</span>
             </button>
           </form>
           <div id="res-kvar-current" class="result-card glass-card hidden"></div>
@@ -301,7 +302,7 @@
                 <input type="number" id="inp-yd-p" step="0.01" placeholder="Örn: 15" />
               </div>
               <div class="input-group">
-                <label data-i18n="current_a">Motor Akımı (A) — Alternatif</label>
+                <label data-i18n="yd_motor_i_alt">Motor Akımı (A) — Alternatif</label>
                 <input type="number" id="inp-yd-i" step="0.1" placeholder="Veya doğrudan girin" />
               </div>
             </div>
@@ -349,19 +350,19 @@
           <form class="calculator-form" id="form-vdrop">
             <div class="input-row">
               <div class="input-group">
-                <label>Sistem Tipi</label>
+                <label data-i18n="vd_phase">Sistem Tipi</label>
                 <select id="inp-vd-phase"
                   style="background:var(--surface);color:var(--text-main);border:1px solid var(--secondary);padding:0.8rem 1rem;border-radius:var(--radius-sm);width:100%;font-size:1rem;">
-                  <option value="3">Trifaze (3Φ)</option>
-                  <option value="1">Monofaze (1Φ)</option>
+                  <option value="3" data-i18n="vd_phase_3">Trifaze (3Φ)</option>
+                  <option value="1" data-i18n="vd_phase_1">Monofaze (1Φ)</option>
                 </select>
               </div>
               <div class="input-group">
-                <label>İletken Tipi</label>
+                <label data-i18n="vd_mat">İletken Tipi</label>
                 <select id="inp-vd-mat"
                   style="background:var(--surface);color:var(--text-main);border:1px solid var(--secondary);padding:0.8rem 1rem;border-radius:var(--radius-sm);width:100%;font-size:1rem;">
-                  <option value="0.0175">Bakır (Cu)</option>
-                  <option value="0.028">Alüminyum (Al)</option>
+                  <option value="0.0175" data-i18n="vd_mat_cu">Bakır (Cu)</option>
+                  <option value="0.028" data-i18n="vd_mat_al">Alüminyum (Al)</option>
                 </select>
               </div>
             </div>
@@ -377,11 +378,11 @@
             </div>
             <div class="input-row mt-2">
               <div class="input-group">
-                <label>Kablo Uzunluğu (m)</label>
+                <label data-i18n="vd_len">Kablo Uzunluğu (m)</label>
                 <input type="number" id="inp-vd-len" required step="1" placeholder="Örn: 100" />
               </div>
               <div class="input-group">
-                <label>Kablo Kesiti (mm²)</label>
+                <label data-i18n="vd_area">Kablo Kesiti (mm²)</label>
                 <select id="inp-vd-area"
                   style="background:var(--surface);color:var(--text-main);border:1px solid var(--secondary);padding:0.8rem 1rem;border-radius:var(--radius-sm);width:100%;font-size:1rem;">
                   <option>1.5</option>
@@ -428,7 +429,7 @@
               </div>
             </div>
             <div class="input-group mt-2">
-              <label>Kısa Devre Empedansı Uk% (genellikle 4–6%)</label>
+              <label data-i18n="isc_uk">Kısa Devre Empedansı Uk% (genellikle 4–6%)</label>
               <input type="number" id="inp-isc-uk" value="4" step="0.1" min="1" max="20" />
             </div>
             <button type="submit" class="btn btn-primary btn-block mt-3">
@@ -445,20 +446,22 @@
 
         <!-- HP <-> kW Converter -->
         <div class="glass-card">
-          <h3 style="margin-bottom:1rem;font-size:1.1rem;">⚙️ HP ↔ kW Dönüştürücü</h3>
+          <h3 style="margin-bottom:1rem;font-size:1.1rem;" data-i18n="tools_hpkw">⚙️ HP ↔ kW Dönüştürücü</h3>
           <div class="input-row">
             <div class="input-group">
-              <label>HP (Beygir Gücü)</label>
+              <label data-i18n="tools_hp">HP (Beygir Gücü)</label>
               <input type="number" id="inp-hp" step="0.01" placeholder="Örn: 10" />
             </div>
             <div class="input-group">
-              <label>kW</label>
+              <label data-i18n="tools_kw">kW</label>
               <input type="number" id="inp-kw-conv" step="0.01" placeholder="Örn: 7.5" />
             </div>
           </div>
           <div class="btn-row" style="display:flex;gap:0.5rem;margin-top:1rem;">
-            <button class="btn btn-primary" style="flex:1" onclick="convertHPtoKW()">HP → kW</button>
-            <button class="btn btn-secondary" style="flex:1" onclick="convertKWtoHP()">kW → HP</button>
+            <button class="btn btn-primary" style="flex:1" onclick="convertHPtoKW()" data-i18n="tools_hp_to_kw">HP →
+              kW</button>
+            <button class="btn btn-secondary" style="flex:1" onclick="convertKWtoHP()" data-i18n="tools_kw_to_hp">kW →
+              HP</button>
           </div>
           <div id="res-hp"
             style="margin-top:0.8rem;font-weight:600;text-align:center;font-size:1.1rem;color:var(--primary);"></div>
@@ -466,20 +469,21 @@
 
         <!-- Soft-Starter Info -->
         <div class="glass-card">
-          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">🔁 Soft-Starter Devreye Alma Akımı</h3>
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;" data-i18n="tools_ss">🔁 Soft-Starter Devreye Alma Akımı
+          </h3>
           <form class="calculator-form" id="form-ss">
             <div class="input-row">
               <div class="input-group">
-                <label>Motor Akımı I_nom (A)</label>
+                <label data-i18n="tools_ss_inom">Motor Akımı I_nom (A)</label>
                 <input type="number" id="inp-ss-i" step="0.1" placeholder="Örn: 20" />
               </div>
               <div class="input-group">
-                <label>Devreye Alma Çarpanı</label>
+                <label data-i18n="tools_ss_mult">Devreye Alma Çarpanı</label>
                 <select id="inp-ss-mult"
                   style="background:var(--surface);color:var(--text-main);border:1px solid var(--secondary);padding:0.8rem;border-radius:var(--radius-sm);width:100%;font-size:1rem;">
-                  <option value="2">2× (Hafif Yük)</option>
-                  <option value="3" selected>3× (Normal)</option>
-                  <option value="4">4× (Ağır Yük)</option>
+                  <option value="2" data-i18n="tools_ss_mult_2">2× (Hafif Yük)</option>
+                  <option value="3" selected data-i18n="tools_ss_mult_3">3× (Normal)</option>
+                  <option value="4" data-i18n="tools_ss_mult_4">4× (Ağır Yük)</option>
                 </select>
               </div>
             </div>
@@ -492,32 +496,32 @@
 
         <!-- Lighting -->
         <div class="glass-card">
-          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">💡 Aydınlatma Hesabı</h3>
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;" data-i18n="tools_light">💡 Aydınlatma Hesabı</h3>
           <form class="calculator-form" id="form-light">
             <div class="input-row">
               <div class="input-group">
-                <label>Alan (m²)</label>
+                <label data-i18n="tools_lt_area">Alan (m²)</label>
                 <input type="number" id="inp-lt-area" step="1" placeholder="Örn: 50" />
               </div>
               <div class="input-group">
-                <label>Hedef Lüks (lx)</label>
+                <label data-i18n="tools_lt_lux">Hedef Lüks (lx)</label>
                 <select id="inp-lt-lux"
                   style="background:var(--surface);color:var(--text-main);border:1px solid var(--secondary);padding:0.8rem;border-radius:var(--radius-sm);width:100%;font-size:1rem;">
-                  <option value="100">100 lx — Depo/Koridor</option>
-                  <option value="200">200 lx — Merdiven</option>
-                  <option value="300" selected>300 lx — Ofis/Atölye</option>
-                  <option value="500">500 lx — Teknik Ofis</option>
-                  <option value="750">750 lx — Hassas İşlem</option>
+                  <option value="100" data-i18n="tools_lt_lx_100">100 lx — Depo/Koridor</option>
+                  <option value="200" data-i18n="tools_lt_lx_200">200 lx — Merdiven</option>
+                  <option value="300" selected data-i18n="tools_lt_lx_300">300 lx — Ofis/Atölye</option>
+                  <option value="500" data-i18n="tools_lt_lx_500">500 lx — Teknik Ofis</option>
+                  <option value="750" data-i18n="tools_lt_lx_750">750 lx — Hassas İşlem</option>
                 </select>
               </div>
             </div>
             <div class="input-row mt-2">
               <div class="input-group">
-                <label>Armatür Gücü (W)</label>
+                <label data-i18n="tools_lt_pw">Armatür Gücü (W)</label>
                 <input type="number" id="inp-lt-w" value="60" step="1" placeholder="Örn: 60" />
               </div>
               <div class="input-group">
-                <label>Armatür Verimliliği (lm/W)</label>
+                <label data-i18n="tools_lt_eff">Armatür Verimliliği (lm/W)</label>
                 <input type="number" id="inp-lt-eff" value="100" step="1" placeholder="Örn: 100" />
               </div>
             </div>
@@ -532,82 +536,82 @@
 
         <!-- IP Class Guide -->
         <div class="glass-card">
-          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">🛡️ IP Koruma Sınıfı Rehberi</h3>
+          <h3 style="margin-bottom:0.8rem;font-size:1.1rem;" data-i18n="tools_ip">🛡️ IP Koruma Sınıfı Rehberi</h3>
           <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
             <thead>
               <tr style="background:var(--primary);color:white;">
                 <th style="padding:6px 8px;text-align:left;">IP</th>
-                <th style="padding:6px 8px;text-align:left;">Katı Koruma</th>
-                <th style="padding:6px 8px;text-align:left;">Sıvı Koruma</th>
-                <th style="padding:6px 8px;text-align:left;">Kullanım Yeri</th>
+                <th style="padding:6px 8px;text-align:left;" data-i18n="ip_solid">Katı Koruma</th>
+                <th style="padding:6px 8px;text-align:left;" data-i18n="ip_liquid">Sıvı Koruma</th>
+                <th style="padding:6px 8px;text-align:left;" data-i18n="ip_use">Kullanım Yeri</th>
               </tr>
             </thead>
             <tbody>
               <tr style="border-bottom:1px solid var(--secondary)">
                 <td style="padding:6px 8px;">IP20</td>
-                <td style="padding:6px 8px;">Parmak</td>
-                <td style="padding:6px 8px;">Yok</td>
-                <td style="padding:6px 8px;">Dahili pano</td>
+                <td style="padding:6px 8px;" data-i18n="ip_finger">Parmak</td>
+                <td style="padding:6px 8px;" data-i18n="ip_none">Yok</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_in">Dahili pano</td>
               </tr>
               <tr style="border-bottom:1px solid var(--secondary)">
                 <td style="padding:6px 8px;">IP30</td>
-                <td style="padding:6px 8px;">Alet &gt; 2.5mm</td>
-                <td style="padding:6px 8px;">Yok</td>
-                <td style="padding:6px 8px;">İç mekan pano</td>
+                <td style="padding:6px 8px;" data-i18n="ip_tool_25">Alet &gt; 2.5mm</td>
+                <td style="padding:6px 8px;" data-i18n="ip_none">Yok</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_in_pan">İç mekan pano</td>
               </tr>
               <tr style="border-bottom:1px solid var(--secondary)">
                 <td style="padding:6px 8px;">IP31</td>
-                <td style="padding:6px 8px;">Alet &gt; 2.5mm</td>
-                <td style="padding:6px 8px;">Düşey damlama</td>
-                <td style="padding:6px 8px;">İç mekan dağıtım</td>
+                <td style="padding:6px 8px;" data-i18n="ip_tool_25">Alet &gt; 2.5mm</td>
+                <td style="padding:6px 8px;" data-i18n="ip_drop_v">Düşey damlama</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_in_dist">İç mekan dağıtım</td>
               </tr>
               <tr style="border-bottom:1px solid var(--secondary)">
                 <td style="padding:6px 8px;">IP40</td>
-                <td style="padding:6px 8px;">Tel &gt; 1mm</td>
-                <td style="padding:6px 8px;">Yok</td>
-                <td style="padding:6px 8px;">İç mekan kontrol</td>
+                <td style="padding:6px 8px;" data-i18n="ip_tool_1">Tel &gt; 1mm</td>
+                <td style="padding:6px 8px;" data-i18n="ip_none">Yok</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_in_ctrl">İç mekan kontrol</td>
               </tr>
               <tr style="border-bottom:1px solid var(--secondary)">
                 <td style="padding:6px 8px;">IP41</td>
-                <td style="padding:6px 8px;">Tel &gt; 1mm</td>
-                <td style="padding:6px 8px;">Düşey damlama</td>
-                <td style="padding:6px 8px;">İç mekan terminal</td>
+                <td style="padding:6px 8px;" data-i18n="ip_tool_1">Tel &gt; 1mm</td>
+                <td style="padding:6px 8px;" data-i18n="ip_drop_v">Düşey damlama</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_in_term">İç mekan terminal</td>
               </tr>
               <tr style="border-bottom:1px solid var(--secondary)">
                 <td style="padding:6px 8px;">IP44</td>
-                <td style="padding:6px 8px;">Tel &gt; 1mm</td>
-                <td style="padding:6px 8px;">Her yönden sıçrama</td>
-                <td style="padding:6px 8px;">Genel amaçlı</td>
+                <td style="padding:6px 8px;" data-i18n="ip_tool_1">Tel &gt; 1mm</td>
+                <td style="padding:6px 8px;" data-i18n="ip_splash">Her yönden sıçrama</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_gen">Genel amaçlı</td>
               </tr>
               <tr style="border-bottom:1px solid var(--secondary)">
                 <td style="padding:6px 8px;">IP54</td>
-                <td style="padding:6px 8px;">Toz kısmi</td>
-                <td style="padding:6px 8px;">Her yönden sıçrama</td>
-                <td style="padding:6px 8px;">Açık / nemli</td>
+                <td style="padding:6px 8px;" data-i18n="ip_dust_part">Toz kısmi</td>
+                <td style="padding:6px 8px;" data-i18n="ip_splash">Her yönden sıçrama</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_out_damp">Açık / nemli</td>
               </tr>
               <tr style="border-bottom:1px solid var(--secondary)">
                 <td style="padding:6px 8px;">IP55</td>
-                <td style="padding:6px 8px;">Toz kısmi</td>
-                <td style="padding:6px 8px;">Su jeti</td>
-                <td style="padding:6px 8px;">Dış ortam motor</td>
+                <td style="padding:6px 8px;" data-i18n="ip_dust_part">Toz kısmi</td>
+                <td style="padding:6px 8px;" data-i18n="ip_jet">Su jeti</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_out_motor">Dış ortam motor</td>
               </tr>
               <tr style="border-bottom:1px solid var(--secondary)">
                 <td style="padding:6px 8px;">IP65</td>
-                <td style="padding:6px 8px;">Tam toz</td>
-                <td style="padding:6px 8px;">Su jeti</td>
-                <td style="padding:6px 8px;">Sanayi / dış</td>
+                <td style="padding:6px 8px;" data-i18n="ip_dust_full">Tam toz</td>
+                <td style="padding:6px 8px;" data-i18n="ip_jet">Su jeti</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_ind_out">Sanayi / dış</td>
               </tr>
               <tr style="border-bottom:1px solid var(--secondary)">
                 <td style="padding:6px 8px;">IP67</td>
-                <td style="padding:6px 8px;">Tam toz</td>
-                <td style="padding:6px 8px;">1m suya dalmaya</td>
-                <td style="padding:6px 8px;">Yıkama alanları</td>
+                <td style="padding:6px 8px;" data-i18n="ip_dust_full">Tam toz</td>
+                <td style="padding:6px 8px;" data-i18n="ip_sub_1m">1m suya dalmaya</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_wash">Yıkama alanları</td>
               </tr>
               <tr>
                 <td style="padding:6px 8px;">IP68</td>
-                <td style="padding:6px 8px;">Tam toz</td>
-                <td style="padding:6px 8px;">Sürekli dalma</td>
-                <td style="padding:6px 8px;">Sualtı pompa</td>
+                <td style="padding:6px 8px;" data-i18n="ip_dust_full">Tam toz</td>
+                <td style="padding:6px 8px;" data-i18n="ip_sub_cont">Sürekli dalma</td>
+                <td style="padding:6px 8px;" data-i18n="ip_loc_under">Sualtı pompa</td>
               </tr>
             </tbody>
           </table>
