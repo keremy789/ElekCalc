@@ -1,0 +1,2 @@
+Line 145: tip_kvar_iec: "IEC standartlarına göre kapasitif yüklerde harmonikler ve deşarj akımları nedeniyle şalter ve kablo kesiti nominal akımın en az 1.35 - 1.5 katı olarak tasarlanmalıdır. Hesaplamada 1.5 çarpanı kullanılmıştır.",
+Line 1225: '💡 IEC standartlarına göre kapasitif yüklerde harmonikler ve deşarj akımları nedeniyle şalter ve kablo kesiti nominal akımın en az 1.35 - 1.5 katı olarak tasarlanmalıdır. Hesaplamada 1.5 çarpanı kullanılmıştır.'

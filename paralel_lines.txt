@@ -1,0 +1,3 @@
+Line 195: res_badge_parallel: "(Muhtemel Paralel)",
+Line 254: res_badge_parallel: "(Muhtemel Paralel)",
+Line 677: return { size: 'Paralel Bağlantı Gerekli', color: 'red' };

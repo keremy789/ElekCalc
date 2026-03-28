@@ -173,6 +173,83 @@ const i18n = {
         res_ss_cb: "Önerilen Motor Sigortası",
         res_trafo_sec_cb: "Sekonder Ana Şalter",
         res_trafo_cab: "Örnek Ana Kablo",
+                auth_login_progress: "Giriş yapılıyor, lütfen bekleyin...",
+        auth_verify_email_err: "Lütfen e-postanızı doğrulayın! Kayıt olurken size bir link gönderdik.",
+        auth_login_fail: "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
+        auth_reg_progress: "Hesabınız oluşturuluyor, lütfen bekleyin...",
+        auth_reg_send_verify: "Doğrulama e-postası gönderiliyor...",
+        auth_reg_unverified: "Hesap oluşturuldu! E-posta gönderilemedi ama hesabınız aktif.",
+        auth_reg_fail: "Kayıt başarısız: ",
+        auth_unknown_err: "Bilinmeyen bir hata oluştu.",
+        auth_verify_sent: "Gönderildi ✓",
+        auth_verify_err: "Hata: ",
+        auth_forgot_tgl_pw: "Şifremi Unuttum",
+        auth_forgot_tgl_cncl: "Vazgeç",
+        auth_forgot_err_email: "Lütfen e-posta adresinizi girin.",
+        auth_forgot_sending: "Gönderiliyor...",
+        auth_forgot_success: "şifre sıfırlama linki gönderildi! Mail kutunuzu kontrol edin.",
+        auth_forgot_btn: "Link Gönder",
+        res_badge_fuse: "Sigorta",
+        res_badge_breaker: "Şalter",
+        res_badge_tms: "TMŞ",
+        res_badge_parallel: "(Muhtemel Paralel)",
+        tip_yd_time: "AI Önerisi: Bu güç seviyesinde geçiş süresi (Y→Δ) 5–8 sn arası ayarlanmalıdır.",
+        tip_yd_ss: "AI Önerisi: Devreye alma süreci kritik; alternatif olarak Soft-Starter değerlendirilebilir.",
+        hist_del_prompt: "Tüm geçmişinizi silmek istediğinize emin misiniz?",
+        hist_del_btn: "Sil",
+        vd_status_norm: "✅ Normal (< 3%)",
+        vd_status_high: "⚠️ Yüksek (3–5%)",
+        vd_status_crit: "🔴 Kritik (> 5%) — Kesit Artırın!",
+        tip_vd: "AI Önerisi: Gerilim düşümü IEC sınırını aşıyor. Kablo kesitini büyütün veya hattı kısaltın.",
+        tip_isc_cap_1: "AI Önerisi: Uk=",
+        tip_isc_cap_2: "% için kesici kesme kapasitesi en az ",
+        tip_isc_cap_3: " kA olmalıdır.",
+        tip_isc_cable: "Kablo ve şalter seçiminde kısa devre akımının etkileri göz önünde bulundurulmalıdır.",
+        tip_ss_range: "Soft-Starter devreye alma akımını motor tipine ve yüke göre 2×–4× arasında ayarlayabilirsiniz.",
+        unit_pcs: "adet",
+        busbar_req_custom: "Özel Hesaplama Gerekli",
+        busbar_ph: "Faz Barası (L1, L2, L3):",
+        busbar_n: "Nötr Barası (N):",
+        busbar_pe: "Toprak Barası (PE):",
+        busbar_tip: "Nötr tercihinize göre (%100 veya %50), Toprak (PE) ise standart gereği %50 kesitinde hesaplanmıştır.",
+        busbar_or: "veya",
+        msg_saved: "Hesaplama Kaydedildi!",
+        hist_import_success: "kayıt içe aktarıldı!",
+        export_json: "JSON Dışa",
+        import_json: "JSON İçe",
+        busbar_err_i: "Lütfen akım değerini girin.",
+        auth_sub: "Hesaplamalarına ulaşmak için giriş yap",
+        verify_title: "E-postanı Doğrula",
+        verify_link_sent: "Kayıt linkiniz",
+        verify_mail_suffix: "mail adresinize gönderilmiştir.",
+        btn_ok: "Tamam",
+        btn_resend: "Tekrar gönder",
+        remember_me: "Beni Hatırla",
+        forgot_pw_sub: "E-posta adresinizi girin, şifre sıfırlama linki",
+        btn_send_link: "Link Gönder",
+        yd_help: "Motor akımına göre üç kontaktör ve termik röle akımlarını",
+        busbar_help: "Akım değerini girin, Panelmaster standartlarına göre uygun",
+        isc_help: "Trafo sekonder terminallerinde hesaplanır.",
+        yd_min: "min.",
+        yd_inom_eq: "I_nom",
+                ph_username: "mühendis123",
+        ph_email: "muhendis@sirket.com",
+        ph_ex_1000: "Örn: 1000",
+        ph_ex_100: "Örn: 100",
+        ph_ex_15: "Örn: 15",
+        ph_or_direct: "Veya doğrudan girin",
+        ph_ex_1250: "Örn: 1250",
+        ph_ex_10: "Örn: 10",
+        ph_ex_7_5: "Örn: 7.5",
+        ph_ex_20: "Örn: 20",
+        ph_ex_50: "Örn: 50",
+        ph_ex_60: "Örn: 60",
+        ph_cat: "Örn: A Blok Pano",
+        ph_notes: "Örn: 5. kat havalandırma motoru",
+        title_theme: "Tema Değiştir",
+        title_logout: "Çıkış Yap",
+        default_username: "Kullanıcı",
+        res_badge_req_parallel: "Paralel Bağlantı Gerekli",
         nav_busbar: "Bara"
     },
     en: {
@@ -336,6 +413,83 @@ const i18n = {
         res_ss_cb: "Recommended Motor Breaker",
         res_trafo_sec_cb: "Secondary Main Breaker",
         res_trafo_cab: "Example Main Cable",
+                auth_login_progress: "Logging in, please wait...",
+        auth_verify_email_err: "Please verify your email! We sent a link during registration.",
+        auth_login_fail: "Login failed. Please check your credentials.",
+        auth_reg_progress: "Account is being created, please wait...",
+        auth_reg_send_verify: "Sending verification email...",
+        auth_reg_unverified: "Account created! Email sending failed but account is active.",
+        auth_reg_fail: "Registration failed: ",
+        auth_unknown_err: "Unknown error occurred.",
+        auth_verify_sent: "Sent ✓",
+        auth_verify_err: "Error: ",
+        auth_forgot_tgl_pw: "Forgot Password",
+        auth_forgot_tgl_cncl: "Cancel",
+        auth_forgot_err_email: "Please enter your email address.",
+        auth_forgot_sending: "Sending...",
+        auth_forgot_success: "Password reset link sent! Check your inbox.",
+        auth_forgot_btn: "Send Link",
+        res_badge_fuse: "Breaker",
+        res_badge_breaker: "Breaker",
+        res_badge_tms: "MCCB",
+        res_badge_parallel: "(Likely Parallel)",
+        tip_yd_time: "AI Tip: At this power level, star-delta transition time should be set between 5-8 sec.",
+        tip_yd_ss: "AI Tip: Startup process is critical; consider a Soft-Starter as an alternative.",
+        hist_del_prompt: "Are you sure you want to delete all history?",
+        hist_del_btn: "Delete",
+        vd_status_norm: "✅ Normal (< 3%)",
+        vd_status_high: "⚠️ High (3-5%)",
+        vd_status_crit: "🔴 Critical (> 5%) — Increase cross-section!",
+        tip_vd: "AI Tip: Voltage drop exceeds IEC limits. Increase cable cross-section or shorten the line.",
+        tip_isc_cap_1: "AI Tip: For Uk=",
+        tip_isc_cap_2: "%, breaker breaking capacity must be at least ",
+        tip_isc_cap_3: " kA.",
+        tip_isc_cable: "Consider the effects of short circuit current in cable and breaker selection.",
+        tip_ss_range: "You can set Soft-Starter startup current between 2×-4× depending on motor type and load.",
+        unit_pcs: "pcs",
+        busbar_req_custom: "Custom Calc Required",
+        busbar_ph: "Phase Busbar (L1, L2, L3):",
+        busbar_n: "Neutral Busbar (N):",
+        busbar_pe: "Earth Busbar (PE):",
+        busbar_tip: "Based on your neutral preference (100% or 50%), Earth (PE) is calculated at 50% cross-section per standards.",
+        busbar_or: "or",
+        msg_saved: "Calculation Saved!",
+        hist_import_success: "records imported!",
+        export_json: "Export JSON",
+        import_json: "Import JSON",
+        busbar_err_i: "Please enter current value.",
+        auth_sub: "Log in to access your calculations",
+        verify_title: "Verify Your Email",
+        verify_link_sent: "Your registration link has been sent to",
+        verify_mail_suffix: ".",
+        btn_ok: "OK",
+        btn_resend: "Resend",
+        remember_me: "Remember Me",
+        forgot_pw_sub: "Enter your email address to receive a password reset link:",
+        btn_send_link: "Send Link",
+        yd_help: "Calculates the currents of three contactors and thermal relay based on motor current.",
+        busbar_help: "Enter the current value to find the suitable busbar according to Panelmaster standards.",
+        isc_help: "Calculated at transformer secondary terminals.",
+        yd_min: "min.",
+        yd_inom_eq: "I_nom",
+                ph_username: "engineer123",
+        ph_email: "engineer@company.com",
+        ph_ex_1000: "e.g. 1000",
+        ph_ex_100: "e.g. 100",
+        ph_ex_15: "e.g. 15",
+        ph_or_direct: "Or enter directly",
+        ph_ex_1250: "e.g. 1250",
+        ph_ex_10: "e.g. 10",
+        ph_ex_7_5: "e.g. 7.5",
+        ph_ex_20: "e.g. 20",
+        ph_ex_50: "e.g. 50",
+        ph_ex_60: "e.g. 60",
+        ph_cat: "e.g. Block A Panel",
+        ph_notes: "e.g. 5th floor vent motor",
+        title_theme: "Toggle Theme",
+        title_logout: "Logout",
+        default_username: "User",
+        res_badge_req_parallel: "Parallel Connection Required",
         nav_busbar: "Busbar"
     }
 };
@@ -350,6 +504,12 @@ const applyTranslations = () => {
         } else {
             el.innerText = translate(k);
         }
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        el.placeholder = translate(el.getAttribute('data-i18n-placeholder'));
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+        el.title = translate(el.getAttribute('data-i18n-title'));
     });
 };
 
@@ -398,7 +558,7 @@ const getCable = (current) => {
             return { size: c.size, color };
         }
     }
-    return { size: 'Paralel Bağlantı Gerekli', color: 'red' };
+    return { size: translate('res_badge_req_parallel'), color: 'red' };
 };
 
 // Badge helper
@@ -460,7 +620,7 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
         // Login
         try {
             errEl.style.color = '#3b82f6';
-            errEl.innerText = "Giriş yapılıyor, lütfen bekleyin...";
+            errEl.innerText = translate('auth_login_progress');
             errEl.style.display = 'block';
 
             const userCredential = await signInWithEmailAndPassword(auth, email, pass);
@@ -468,7 +628,7 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
 
             if (!user.emailVerified) {
                 errEl.style.color = '#ef4444';
-                errEl.innerText = "Lütfen e-postanızı doğrulayın! Kayıt olurken size bir link gönderdik.";
+                errEl.innerText = translate('auth_verify_email_err');
                 errEl.style.display = 'block';
                 await auth.signOut();
                 return;
@@ -486,7 +646,7 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
         } catch (err) {
             console.error(err);
             errEl.style.color = '#ef4444';
-            errEl.innerText = "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.";
+            errEl.innerText = translate('auth_login_fail');
             errEl.style.display = 'block';
         }
     } else {
@@ -494,7 +654,7 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
         try {
             isRegistering = true; // Prevent onAuthStateChanged from resetting UI
             errEl.style.color = '#3b82f6';
-            errEl.innerText = "Hesabınız oluşturuluyor, lütfen bekleyin...";
+            errEl.innerText = translate('auth_reg_progress');
             errEl.style.display = 'block';
 
             const userCredential = await createUserWithEmailAndPassword(auth, email, pass);
@@ -506,14 +666,14 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
             }
 
             // Send verification email
-            errEl.innerText = "Doğrulama e-postası gönderiliyor...";
+            errEl.innerText = translate('auth_reg_send_verify');
             try {
                 await sendEmailVerification(user);
             } catch (emailErr) {
                 console.error("Verification email failed:", emailErr);
                 // Still sign out and show notice even if email fails
                 errEl.style.color = '#ef8c44';
-                errEl.innerText = "Hesap oluşturuldu! E-posta gönderilemedi ama hesabınız aktif.";
+                errEl.innerText = translate('auth_reg_unverified');
             }
 
             // Sign out immediately - user must verify email before logging in
@@ -536,7 +696,7 @@ document.getElementById('auth-form').addEventListener('submit', async (e) => {
         } catch (err) {
             console.error(err);
             errEl.style.color = '#ef4444';
-            errEl.innerText = "Kayıt başarısız: " + (err.message || "Bilinmeyen bir hata oluştu.");
+            errEl.innerText = translate('auth_reg_fail') + (err.message || translate('auth_unknown_err'));
             errEl.style.display = 'block';
         } finally {
             if (isRegistering) isRegistering = false; // Only reset if not already done
@@ -553,10 +713,10 @@ if (resendBtn) {
         if (auth.currentUser) {
             try {
                 await sendEmailVerification(auth.currentUser);
-                resendBtn.innerText = 'Gönderildi ✓';
+                resendBtn.innerText = translate('auth_verify_sent');
                 resendBtn.disabled = true;
             } catch (err) {
-                resendBtn.innerText = 'Hata: ' + err.message;
+                resendBtn.innerText = translate('auth_verify_err') + err.message;
             }
         }
     });
@@ -577,7 +737,7 @@ if (forgotPwBtn && forgotPwPanel) {
     forgotPwBtn.addEventListener('click', () => {
         const isOpen = forgotPwPanel.style.display !== 'none';
         forgotPwPanel.style.display = isOpen ? 'none' : 'block';
-        forgotPwBtn.innerText = isOpen ? 'Şifremi Unuttum' : 'Vazgeç';
+        forgotPwBtn.innerText = isOpen ? translate('auth_forgot_tgl_pw') : translate('auth_forgot_tgl_cncl');
     });
 }
 
@@ -589,22 +749,22 @@ if (sendResetBtn) {
         const msg = document.getElementById('forgot-pw-msg');
         if (!email) {
             msg.style.color = '#ef4444';
-            msg.innerText = 'Lütfen e-posta adresinizi girin.';
+            msg.innerText = translate('auth_forgot_err_email');
             return;
         }
         try {
             sendResetBtn.disabled = true;
-            sendResetBtn.innerText = 'Gönderiliyor...';
+            sendResetBtn.innerText = translate('auth_forgot_sending');
             const { auth, sendPasswordResetEmail } = window.firebaseAuth;
             await sendPasswordResetEmail(auth, email);
             msg.style.color = '#22c55e';
-            msg.innerText = 'şifre sıfırlama linki gönderildi! Mail kutunuzu kontrol edin.';
-            sendResetBtn.innerText = 'Gönderildi ✓';
+            msg.innerText = translate('auth_forgot_success');
+            sendResetBtn.innerText = translate('auth_verify_sent');
         } catch (err) {
             msg.style.color = '#ef4444';
-            msg.innerText = 'Hata: ' + err.message;
+            msg.innerText = translate('auth_verify_err') + err.message;
             sendResetBtn.disabled = false;
-            sendResetBtn.innerText = 'Link Gönder';
+            sendResetBtn.innerText = translate('auth_forgot_btn');
         }
     });
 }
@@ -791,7 +951,7 @@ document.getElementById('btn-modal-save').addEventListener('click', async () => 
 
     await window.dbAPI.saveCalculation(lastCalcResult);
     document.getElementById('save-modal').classList.add('hidden');
-    alert("Hesaplama Kaydedildi!");
+    alert(translate('msg_saved'));
 });
 
 
@@ -839,7 +999,7 @@ document.getElementById('form-1ph').addEventListener('submit', (e) => {
         { label: translate('res_power'), value: `${p.toFixed(2)} kW` },
         { label: translate('res_kva'), value: `${s.toFixed(2)} kVA` },
         { label: translate('res_kvar'), value: `${q.toFixed(2)} kVAR` },
-        { label: translate('res_cb'), value: badge(`${cb} A Sigorta`, 'green') },
+        { label: translate('res_cb'), value: badge(`${cb} A ` + translate('res_badge_fuse'), 'green') },
         { label: translate('res_cable'), value: badge(`${cab.size} mm² Cu`, cab.color) }
     ], tips);
 });
@@ -892,7 +1052,7 @@ document.getElementById('form-3ph').addEventListener('submit', (e) => {
         { label: translate('res_power'), value: `${p.toFixed(2)} kW` },
         { label: translate('res_kva'), value: `${s.toFixed(2)} kVA` },
         { label: translate('res_kvar'), value: `${q.toFixed(2)} kVAR` },
-        { label: translate('res_cb'), value: badge(`${cb} A Şalter`, 'green') },
+        { label: translate('res_cb'), value: badge(`${cb} A ` + translate('res_badge_breaker'), 'green') },
         { label: translate('res_cable'), value: badge(`${cab.size} mm² Cu`, cab.color) }
     ], tips);
 });
@@ -916,8 +1076,8 @@ document.getElementById('form-trafo').addEventListener('submit', (e) => {
     renderResult('res-trafo', [
         { label: translate('res_pri_i'), value: `${pI.toFixed(2)} A` },
         { label: translate('res_sec_i'), value: `${sI.toFixed(2)} A` },
-        { label: translate('res_trafo_sec_cb'), value: badge(`${cb} A TMŞ`, 'green') },
-        { label: translate('res_trafo_cab'), value: badge(`${cab.size} mm² (Muhtemel Paralel)`, 'yellow') }
+        { label: translate('res_trafo_sec_cb'), value: badge(`${cb} A ` + translate('res_badge_tms'), 'green') },
+        { label: translate('res_trafo_cab'), value: cab.size.includes(translate('res_badge_req_parallel')) ? badge(cab.size + ' ' + translate('res_badge_parallel'), 'red') : badge(`${cab.size} mm² ` + translate('res_badge_parallel'), 'yellow') }
     ]);
 });
 
@@ -946,7 +1106,7 @@ document.getElementById('form-kvar-current').addEventListener('submit', (e) => {
         { label: translate('res_kvar_id'), value: `${ic_safe.toFixed(2)} A` },
         { label: translate('res_kvar_cb'), value: badge(`${breaker} A`, 'green') }
     ], [
-        '💡 IEC standartlarına göre kapasitif yüklerde harmonikler ve deşarj akımları nedeniyle şalter ve kablo kesiti nominal akımın en az 1.35 - 1.5 katı olarak tasarlanmalıdır. Hesaplamada 1.5 çarpanı kullanılmıştır.'
+        '💡 ' + translate('tip_kvar_iec')
     ]);
 });
 
@@ -998,14 +1158,14 @@ document.getElementById('form-yd').addEventListener('submit', (e) => {
     renderResult('res-yd', [
         { label: translate('res_yd_inom'), value: `${I.toFixed(2)} A` },
         { label: translate('res_yd_fuse'), value: badge(`${cb} A`, 'green') },
-        { label: translate('res_yd_km'), value: badge(`min. ${km} A   (${I_km.toFixed(2)} A)`, 'green') },
-        { label: translate('res_yd_ky'), value: badge(`min. ${ky} A   (${I_ky.toFixed(2)} A)`, 'blue') },
-        { label: translate('res_yd_kd'), value: badge(`min. ${kd} A   (${I_kdel.toFixed(2)} A)`, 'green') },
-        { label: translate('res_yd_term'), value: badge(`${I_term.toFixed(2)} A (= I_nom)`, 'yellow') },
+        { label: translate('res_yd_km'), value: badge(`${translate('yd_min')} ${km} A   (${I_km.toFixed(2)} A)`, 'green') },
+        { label: translate('res_yd_ky'), value: badge(`${translate('yd_min')} ${ky} A   (${I_ky.toFixed(2)} A)`, 'blue') },
+        { label: translate('res_yd_kd'), value: badge(`${translate('yd_min')} ${kd} A   (${I_kdel.toFixed(2)} A)`, 'green') },
+        { label: translate('res_yd_term'), value: badge(`${I_term.toFixed(2)} A (= ${translate('yd_inom_eq')})`, 'yellow') },
     ], [
         translate('tip_yd_cont'),
-        I > 30 ? 'AI Önerisi: Bu güç seviyesinde geçiş süresi (Y→Δ) 5–8 sn arası ayarlanmalıdır.' : '',
-        p > 18.5 ? 'AI Önerisi: Devreye alma süreci kritik; alternatif olarak Soft-Starter değerlendirilebilir.' : ''
+        I > 30 ? translate('tip_yd_time') : '',
+        p > 18.5 ? translate('tip_yd_ss') : ''
     ].filter(Boolean));
 });
 
@@ -1087,7 +1247,7 @@ const renderHistoryList = (items, filterCat) => {
         <div class="text-muted"><i class="ph ph-lightning"></i> ${sum}</div>
         <div class="history-actions">
           <button class="btn btn-secondary" style="flex:1;font-size:0.8rem" onclick="deleteHistory(${item.id})">
-            <i class="ph ph-trash"></i> Sil
+            <i class="ph ph-trash"></i> ${translate('hist_del_btn')}
           </button>
         </div>
       </div>
@@ -1096,7 +1256,7 @@ const renderHistoryList = (items, filterCat) => {
 };
 
 document.getElementById('btn-clear-history').addEventListener('click', async () => {
-    if (confirm("Tüm geçmişinizi silmek istediğinize emin misiniz?")) {
+    if (confirm(translate('hist_del_prompt'))) {
         await window.dbAPI.clearUserHistory(currentUser);
         loadHistory();
         loadHistoryCategories();
@@ -1133,9 +1293,9 @@ document.getElementById('form-vdrop').addEventListener('submit', (e) => {
     const dU = (k * rho * L * I) / A;       // Volts
     const pct = (dU / v) * 100;
 
-    let col = 'green', status = '✅ Normal (< 3%)';
-    if (pct > 3 && pct <= 5) { col = 'yellow'; status = '⚠️ Yüksek (3–5%)'; }
-    if (pct > 5) { col = 'red'; status = '🔴 Kritik (> 5%) — Kesit Artırın!'; }
+    let col = 'green', status = translate('vd_status_norm');
+    if (pct > 3 && pct <= 5) { col = 'yellow'; status = translate('vd_status_high'); }
+    if (pct > 5) { col = 'red'; status = translate('vd_status_crit'); }
 
     lastCalcResult = { type: 'VDROP', inputs: { v, I, L, A, phase }, results: { dU, pct } };
 
@@ -1144,7 +1304,7 @@ document.getElementById('form-vdrop').addEventListener('submit', (e) => {
         { label: translate('res_vd_pct'), value: badge(`${pct.toFixed(2)} %`, col) },
         { label: translate('res_vd_arr'), value: `${(v - dU).toFixed(1)} V` },
         { label: translate('res_vd_state'), value: badge(status, col) },
-    ], pct > 3 ? ['AI Önerisi: Gerilim düşümü IEC sınırını aşıyor. Kablo kesitini büyütün veya hattı kısaltın.'] : []);
+    ], pct > 3 ? [translate('tip_vd')] : []);
 });
 
 // ===== 7. Short Circuit Current =====
@@ -1172,8 +1332,8 @@ document.getElementById('form-isc').addEventListener('submit', (e) => {
         { label: translate('res_isc_1ph'), value: badge(`${(I_sc1ph / 1000).toFixed(2)} kA`, 'yellow') },
         { label: translate('res_isc_cb'), value: badge(`${cb_main} A`, 'green') },
     ], [
-        `AI Önerisi: Uk=${uk}% için kesici kesme kapasitesi en az ${(I_sc / 1000).toFixed(1)} kA olmalıdır.`,
-        'Kablo ve şalter seçiminde kısa devre akımının etkileri göz önünde bulundurulmalıdır.'
+        `${translate('tip_isc_cap_1')}${uk}${translate('tip_isc_cap_2')}${(I_sc / 1000).toFixed(1)}${translate('tip_isc_cap_3')}`,
+        translate('tip_isc_cable')
     ]);
 });
 
@@ -1192,7 +1352,7 @@ document.getElementById('form-ss').addEventListener('submit', (e) => {
         { label: translate('res_ss_inom'), value: `${I.toFixed(2)} A` },
         { label: `${translate('res_ss_demaraj')} (×${mult})`, value: badge(`${I_start.toFixed(2)} A`, 'yellow') },
         { label: translate('res_ss_cb'), value: badge(`${cb} A`, 'green') },
-    ], ['Soft-Starter devreye alma akımını motor tipine ve yüke göre 2×–4× arasında ayarlayabilirsiniz.']);
+    ], [translate('tip_ss_range')]);
 });
 
 // ===== 9. Lighting =====
@@ -1215,7 +1375,7 @@ document.getElementById('form-light').addEventListener('submit', (e) => {
     renderResult('res-light', [
         { label: translate('res_lt_flux'), value: `${Math.round(totalLm).toLocaleString()} lm` },
         { label: translate('res_lt_fix'), value: `${Math.round(lumPerFix)} lm` },
-        { label: translate('res_lt_num'), value: badge(`${numFix} adet`, 'green') },
+        { label: translate('res_lt_num'), value: badge(`${numFix} ` + translate('unit_pcs'), 'green') },
         { label: translate('res_lt_p'), value: `${totalW} W` },
         { label: translate('res_lt_i'), value: `${I_load.toFixed(2)} A` },
     ], [translate('tip_lt_maint')]);
@@ -1229,7 +1389,7 @@ document.getElementById('form-busbar').addEventListener('submit', (e) => {
     e.preventDefault();
     const I = parseFloat(document.getElementById('inp-bus-i').value);
     const nIsHalf = document.getElementById('tog-bus-n-half').checked;
-    if (isNaN(I)) return alert('Lütfen akım değerini girin.');
+    if (isNaN(I)) return alert(translate('busbar_err_i'));
 
     let barra = "";
     let barraN = "";
@@ -1240,7 +1400,7 @@ document.getElementById('form-busbar').addEventListener('submit', (e) => {
     if (I <= 250) {
         barra = "20 x 5";
         barraN = "20 x 5";
-        barraPE = "20 x 3 veya 15x5"; // ~50-60mm2 (1/2 of 100mm2)
+        barraPE = "20 x 3 " + translate('busbar_or') + " 15x5"; // ~50-60mm2 (1/2 of 100mm2)
     }
     else if (I <= 400) {
         barra = "30 x 5";
@@ -1290,25 +1450,25 @@ document.getElementById('form-busbar').addEventListener('submit', (e) => {
         barraPE = "1 x (100 x 10)";
         count = "2";
     }
-    else { barra = "Özel Hesaplama Gerekli"; barraN = "-"; barraPE = "-"; count = "-"; color = "red"; }
+    else { barra = translate('busbar_req_custom'); barraN = "-"; barraPE = "-"; count = "-"; color = "red"; }
 
     const container = document.getElementById('res-busbar');
     container.innerHTML = `
         <div class="res-row">
-            <span class="res-label">Faz Barası (L1, L2, L3):</span>
+            <span class="res-label">${translate('busbar_ph')}</span>
             <span class="res-value">${barra} mm</span>
         </div>
         <div class="res-row">
-            <span class="res-label">Nötr Barası (N):</span>
+            <span class="res-label">${translate('busbar_n')}</span>
             <span class="res-value" style="color:var(--primary)">${barraN} mm</span>
         </div>
         <div class="res-row">
-            <span class="res-label">Toprak Barası (PE):</span>
+            <span class="res-label">${translate('busbar_pe')}</span>
             <span class="res-value" style="color:var(--status-green)">${barraPE} mm</span>
         </div>
         <div class="ai-tip">
             <i class="ph-fill ph-info"></i>
-            <span>Nötr tercihinize göre (%100 veya %50), Toprak (PE) ise standart gereği %50 kesitinde hesaplanmıştır.</span>
+            <span>${translate('busbar_tip')}</span>
         </div>
     `;
     container.classList.remove('hidden');
@@ -1333,7 +1493,7 @@ window.convertKWtoHP = () => {
 const exportBtn = document.createElement('button');
 exportBtn.className = 'btn-text';
 exportBtn.style.fontSize = '0.8rem';
-exportBtn.innerHTML = '<i class="ph ph-download-simple"></i> JSON Dışa';
+exportBtn.innerHTML = '<i class="ph ph-download-simple"></i> ' + translate('export_json');
 exportBtn.onclick = async () => {
     const items = await window.dbAPI.getHistoryByUser(currentUser);
     const blob = new Blob([JSON.stringify(items, null, 2)], { type: 'application/json' });
@@ -1358,14 +1518,14 @@ importInput.onchange = async (e) => {
         copy.username = currentUser;
         await window.dbAPI.saveCalculation(copy);
     }
-    alert(`${items.length} kayıt içe aktarıldı!`);
+    alert(`${items.length} ` + translate('hist_import_success'));
     loadHistory(); loadHistoryCategories();
 };
 
 const importBtn = document.createElement('button');
 importBtn.className = 'btn-text';
 importBtn.style.fontSize = '0.8rem';
-importBtn.innerHTML = '<i class="ph ph-upload-simple"></i> JSON İçe';
+importBtn.innerHTML = '<i class="ph ph-upload-simple"></i> ' + translate('import_json');
 importBtn.onclick = () => importInput.click();
 
 const histHdr = document.querySelector('.history-header');

@@ -26,20 +26,20 @@
       <div class="auth-hero">
         <i class="ph-fill ph-lightning" style="font-size: 4rem; color: var(--primary);"></i>
         <h1 id="auth-title">Giriş Yap</h1>
-        <p id="auth-subtitle" class="text-muted">Hesaplamalarına ulaşmak için giriş yap</p>
+        <p id="auth-subtitle" class="text-muted" data-i18n="auth_sub">Hesaplamalarına ulaşmak için giriş yap</p>
       </div>
 
       <!-- Email Verification Notice (shown after registration) -->
       <div id="verify-notice" style="display:none; text-align:center; padding: 1rem;">
         <i class="ph ph-envelope" style="font-size:3rem; color:var(--primary);"></i>
-        <h2 style="margin:1rem 0 0.5rem">E-postanı Doğrula</h2>
-        <p class="text-muted" id="verify-text">Kayıt linkiniz <strong id="verify-email-display"></strong> mail
-          adresinize gönderilmiştir.</p>
-        <button class="btn btn-primary btn-block" style="margin-top:1.5rem" id="btn-back-to-login">Tamam</button>
-        <button class="btn-text" style="margin-top:0.8rem; display:block; width:100%" id="btn-resend-verify">Tekrar
+        <h2 style="margin:1rem 0 0.5rem" data-i18n="verify_title">E-postanı Doğrula</h2>
+        <p class="text-muted" id="verify-text"><span data-i18n="verify_link_sent">Kayıt linkiniz</span> <strong id="verify-email-display"></strong> <span data-i18n="verify_mail_suffix">mail
+          adresinize gönderilmiştir.</span></p>
+        <button class="btn btn-primary btn-block" style="margin-top:1.5rem" id="btn-back-to-login" data-i18n="btn_ok">Tamam</button>
+        <button class="btn-text" style="margin-top:0.8rem; display:block; width:100%" id="btn-resend-verify" data-i18n="btn_resend">Tekrar
           gönder</button>
-        <p style="margin-top:1.2rem;font-size:0.9rem;">Zaten hesabınız var mı?
-          <button type="button" class="btn-text" id="btn-verify-go-login">Giriş Yap</button>
+        <p style="margin-top:1.2rem;font-size:0.9rem;"><span data-i18n="has_account">Zaten hesabınız var mı?</span>
+          <button type="button" class="btn-text" id="btn-verify-go-login" data-i18n="login">Giriş Yap</button>
         </p>
       </div>
 
@@ -47,13 +47,13 @@
         <!-- Only shown during registration -->
         <div class="input-group" id="group-username" style="display: none;">
           <label for="auth-username" data-i18n="username">Kullanıcı Adı</label>
-          <input type="text" id="auth-username" placeholder="mühendis123" />
+          <input type="text" id="auth-username" placeholder="mühendis123" data-i18n-placeholder="ph_username" />
         </div>
 
         <!-- Email is always visible (login identifier) -->
         <div class="input-group" id="group-email">
           <label for="auth-email" data-i18n="email">E-posta</label>
-          <input type="email" id="auth-email" required placeholder="muhendis@sirket.com" />
+          <input type="email" id="auth-email" required placeholder="muhendis@sirket.com" data-i18n-placeholder="ph_email" />
         </div>
 
         <div class="input-group">
@@ -63,24 +63,24 @@
 
         <div id="auth-error" class="error-msg" style="display: none;"></div>
 
-        <!-- Beni Hatırla + Şifremi Unuttum -->
+        <!-- <span data-i18n="remember_me"><span data-i18n="remember_me">Beni Hatırla</span></span> + Şifremi Unuttum -->
         <div id="login-extras-row"
           style="display:flex; justify-content:space-between; align-items:center; margin: 0.2rem 0 0.5rem;">
           <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.85rem; cursor:pointer;">
             <input type="checkbox" id="chk-remember" style="width:16px;height:16px;accent-color:var(--primary);">
-            Beni Hatırla
+            <span data-i18n="remember_me"><span data-i18n="remember_me">Beni Hatırla</span></span>
           </label>
-          <button type="button" class="btn-text" id="btn-forgot-pw" style="font-size:0.85rem;">Şifremi Unuttum</button>
+          <button type="button" class="btn-text" id="btn-forgot-pw" style="font-size:0.85rem;" data-i18n="auth_forgot_tgl_pw">Şifremi Unuttum</button>
         </div>
 
         <!-- Forgot Password Panel (hidden by default) -->
         <div id="forgot-pw-panel"
           style="display:none; background:var(--surface); border-radius:var(--radius-sm); padding:1rem; margin-bottom:0.8rem;">
-          <p style="font-size:0.85rem; margin-bottom:0.6rem;">E-posta adresinizi girin, şifre sıfırlama linki
+          <p style="font-size:0.85rem; margin-bottom:0.6rem;" data-i18n="forgot_pw_sub">E-posta adresinizi girin, şifre sıfırlama linki
             gönderelim:</p>
-          <input type="email" id="forgot-pw-email" placeholder="muhendis@sirket.com"
+          <input type="email" id="forgot-pw-email" placeholder="muhendis@sirket.com" data-i18n-placeholder="ph_email"
             style="width:100%; padding:0.7rem 1rem; background:var(--bg); border:1px solid var(--secondary); border-radius:var(--radius-sm); color:var(--text-main); font-size:0.95rem; box-sizing:border-box; margin-bottom:0.6rem;">
-          <button type="button" class="btn btn-secondary btn-block" id="btn-send-reset">Link Gönder</button>
+          <button type="button" class="btn btn-secondary btn-block" id="btn-send-reset" data-i18n="auth_forgot_btn">Link Gönder</button>
           <div id="forgot-pw-msg" style="margin-top:0.5rem; font-size:0.85rem;"></div>
         </div>
 
@@ -116,13 +116,13 @@
         <div class="avatar"><i class="ph ph-user"></i></div>
         <div>
           <span class="greeting" data-i18n="hello">Merhaba,</span><br>
-          <strong id="display-username">Kullanıcı</strong>
+          <strong id="display-username" data-i18n="default_username">Kullanıcı</strong>
         </div>
       </div>
       <div class="header-actions">
-        <button id="btn-theme" class="icon-btn" title="Tema Değiştir"><i class="ph ph-moon"></i></button>
+        <button id="btn-theme" class="icon-btn" title="Tema Değiştir" data-i18n-title="title_theme"><i class="ph ph-moon"></i></button>
         <button id="btn-lang" class="icon-btn" title="Change Language">EN</button>
-        <button id="btn-logout" class="icon-btn" title="Çıkış Yap"><i class="ph ph-sign-out"></i></button>
+        <button id="btn-logout" class="icon-btn" title="Çıkış Yap" data-i18n-title="title_logout"><i class="ph ph-sign-out"></i></button>
       </div>
     </header>
 
@@ -232,7 +232,7 @@
           <form class="calculator-form" id="form-trafo">
             <div class="input-group">
               <label data-i18n="trafo_power">Trafo Gücü (kVA)</label>
-              <input type="number" id="inp-tr-s" placeholder="Örn: 1000" required step="1" />
+              <input type="number" id="inp-tr-s" placeholder="Örn: 1000" data-i18n-placeholder="ph_ex_1000" required step="1" />
             </div>
             <div class="input-row mt-2">
               <div class="input-group">
@@ -264,7 +264,7 @@
             <div class="input-row">
               <div class="input-group">
                 <label data-i18n="kvar_total">Toplam Pano / Kondansatör (kVAR)</label>
-                <input type="number" id="inp-kvc-q" required step="0.1" placeholder="Örn: 100" />
+                <input type="number" id="inp-kvc-q" required step="0.1" placeholder="Örn: 100" data-i18n-placeholder="ph_ex_100" />
               </div>
               <div class="input-group">
                 <label data-i18n="voltage">Sistem Gerilimi (V)</label>
@@ -283,7 +283,7 @@
       <section id="tab-yd" class="tab-content">
         <h2 class="tab-title" data-i18n="tab_yd">Yıldız-Üçgen Kontaktör Seçimi</h2>
         <div class="glass-card">
-          <p class="help-text" style="margin-bottom:1rem;">Motor akımına göre üç kontaktör ve termik röle akımlarını
+          <p class="help-text" style="margin-bottom:1rem;" data-i18n="yd_help">Motor akımına göre üç kontaktör ve termik röle akımlarını
             hesaplar.</p>
           <form class="calculator-form" id="form-yd">
             <div class="input-row">
@@ -299,11 +299,11 @@
             <div class="input-row mt-2">
               <div class="input-group">
                 <label data-i18n="power_kw">Motor Gücü (kW)</label>
-                <input type="number" id="inp-yd-p" step="0.01" placeholder="Örn: 15" />
+                <input type="number" id="inp-yd-p" step="0.01" placeholder="Örn: 15" data-i18n-placeholder="ph_ex_15" />
               </div>
               <div class="input-group">
                 <label data-i18n="yd_motor_i_alt">Motor Akımı (A) — Alternatif</label>
-                <input type="number" id="inp-yd-i" step="0.1" placeholder="Veya doğrudan girin" />
+                <input type="number" id="inp-yd-i" step="0.1" placeholder="Veya doğrudan girin" data-i18n-placeholder="ph_or_direct" />
               </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block mt-3">
@@ -320,12 +320,12 @@
         <div class="glass-card">
           <h3 style="margin-bottom:0.8rem;font-size:1.1rem;">⚡ <span data-i18n="busbar_calc">Bakır Bara Seçim
               Hesaplayıcı</span></h3>
-          <p class="help-text" style="margin-bottom:1rem;">Akım değerini girin, Panelmaster standartlarına göre uygun
+          <p class="help-text" style="margin-bottom:1rem;" data-i18n="busbar_help">Akım değerini girin, Panelmaster standartlarına göre uygun
             barayı bulun.</p>
           <form class="calculator-form" id="form-busbar">
             <div class="input-group">
               <label data-i18n="current_a">Akım (A)</label>
-              <input type="number" id="inp-bus-i" placeholder="Örn: 1250" required />
+              <input type="number" id="inp-bus-i" placeholder="Örn: 1250" data-i18n-placeholder="ph_ex_1250" required />
             </div>
             <div class="toggle-group mt-2">
               <label data-i18n="neutral_half">Nötr Kesiti Yarısı (%50) mı?</label>
@@ -379,7 +379,7 @@
             <div class="input-row mt-2">
               <div class="input-group">
                 <label data-i18n="vd_len">Kablo Uzunluğu (m)</label>
-                <input type="number" id="inp-vd-len" required step="1" placeholder="Örn: 100" />
+                <input type="number" id="inp-vd-len" required step="1" placeholder="Örn: 100" data-i18n-placeholder="ph_ex_100" />
               </div>
               <div class="input-group">
                 <label data-i18n="vd_area">Kablo Kesiti (mm²)</label>
@@ -416,12 +416,12 @@
       <section id="tab-isc" class="tab-content">
         <h2 class="tab-title" data-i18n="tab_isc">Kısa Devre Akımı</h2>
         <div class="glass-card">
-          <p class="help-text" style="margin-bottom:1rem;">Trafo sekonder terminallerinde hesaplanır.</p>
+          <p class="help-text" style="margin-bottom:1rem;" data-i18n="isc_help">Trafo sekonder terminallerinde hesaplanır.</p>
           <form class="calculator-form" id="form-isc">
             <div class="input-row">
               <div class="input-group">
                 <label data-i18n="trafo_power">Trafo Gücü (kVA)</label>
-                <input type="number" id="inp-isc-kva" required step="1" placeholder="Örn: 1000" />
+                <input type="number" id="inp-isc-kva" required step="1" placeholder="Örn: 1000" data-i18n-placeholder="ph_ex_1000" />
               </div>
               <div class="input-group">
                 <label data-i18n="secondary_v">Sekonder Gerilim (V)</label>
@@ -450,11 +450,11 @@
           <div class="input-row">
             <div class="input-group">
               <label data-i18n="tools_hp">HP (Beygir Gücü)</label>
-              <input type="number" id="inp-hp" step="0.01" placeholder="Örn: 10" />
+              <input type="number" id="inp-hp" step="0.01" placeholder="Örn: 10" data-i18n-placeholder="ph_ex_10" />
             </div>
             <div class="input-group">
               <label data-i18n="tools_kw">kW</label>
-              <input type="number" id="inp-kw-conv" step="0.01" placeholder="Örn: 7.5" />
+              <input type="number" id="inp-kw-conv" step="0.01" placeholder="Örn: 7.5" data-i18n-placeholder="ph_ex_7_5" />
             </div>
           </div>
           <div class="btn-row" style="display:flex;gap:0.5rem;margin-top:1rem;">
@@ -475,7 +475,7 @@
             <div class="input-row">
               <div class="input-group">
                 <label data-i18n="tools_ss_inom">Motor Akımı I_nom (A)</label>
-                <input type="number" id="inp-ss-i" step="0.1" placeholder="Örn: 20" />
+                <input type="number" id="inp-ss-i" step="0.1" placeholder="Örn: 20" data-i18n-placeholder="ph_ex_20" />
               </div>
               <div class="input-group">
                 <label data-i18n="tools_ss_mult">Devreye Alma Çarpanı</label>
@@ -501,7 +501,7 @@
             <div class="input-row">
               <div class="input-group">
                 <label data-i18n="tools_lt_area">Alan (m²)</label>
-                <input type="number" id="inp-lt-area" step="1" placeholder="Örn: 50" />
+                <input type="number" id="inp-lt-area" step="1" placeholder="Örn: 50" data-i18n-placeholder="ph_ex_50" />
               </div>
               <div class="input-group">
                 <label data-i18n="tools_lt_lux">Hedef Lüks (lx)</label>
@@ -518,11 +518,11 @@
             <div class="input-row mt-2">
               <div class="input-group">
                 <label data-i18n="tools_lt_pw">Armatür Gücü (W)</label>
-                <input type="number" id="inp-lt-w" value="60" step="1" placeholder="Örn: 60" />
+                <input type="number" id="inp-lt-w" value="60" step="1" placeholder="Örn: 60" data-i18n-placeholder="ph_ex_60" />
               </div>
               <div class="input-group">
                 <label data-i18n="tools_lt_eff">Armatür Verimliliği (lm/W)</label>
-                <input type="number" id="inp-lt-eff" value="100" step="1" placeholder="Örn: 100" />
+                <input type="number" id="inp-lt-eff" value="100" step="1" placeholder="Örn: 100" data-i18n-placeholder="ph_ex_100" />
               </div>
             </div>
             <button type="submit" class="btn btn-primary btn-block mt-3">
@@ -691,12 +691,12 @@
       <h3 data-i18n="save_calc">Hesaplamayı Kaydet</h3>
       <div class="input-group">
         <label data-i18n="job_category">İş / Proje Adı (Kategori)</label>
-        <input type="text" id="modal-cat" placeholder="Örn: A Blok Pano" list="cat-suggestions" />
+        <input type="text" id="modal-cat" placeholder="Örn: A Blok Pano" data-i18n-placeholder="ph_cat" list="cat-suggestions" />
         <datalist id="cat-suggestions"></datalist>
       </div>
       <div class="input-group mt-2">
         <label data-i18n="notes">Notlar (Opsiyonel)</label>
-        <textarea id="modal-notes" rows="2" placeholder="Örn: 5. kat havalandırma motoru"></textarea>
+        <textarea id="modal-notes" rows="2" placeholder="Örn: 5. kat havalandırma motoru" data-i18n-placeholder="ph_notes"></textarea>
       </div>
       <div class="modal-actions mt-3">
         <button id="btn-modal-cancel" class="btn btn-secondary" data-i18n="cancel">İptal</button>
